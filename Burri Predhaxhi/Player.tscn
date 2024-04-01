@@ -1,0 +1,135 @@
+[gd_scene load_steps=18 format=3 uid="uid://bgfavc6m175gi"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_roh7o"]
+[ext_resource type="Texture2D" uid="uid://g50f1uko4kc0" path="res://bombman/player_down.png" id="2_nnkqi"]
+[ext_resource type="Texture2D" uid="uid://cxphgodm6jpmt" path="res://bombman/player_left.png" id="3_lqrlv"]
+[ext_resource type="Texture2D" uid="uid://dr3xybgpjede8" path="res://bombman/player_right.png" id="4_g1dkv"]
+[ext_resource type="Texture2D" uid="uid://s0yd8qa27hko" path="res://bombman/player_up.png" id="5_5j3iq"]
+[ext_resource type="Texture2D" uid="uid://c511xerca6gfe" path="res://bombman/player_down_walk1.png" id="6_gv8dg"]
+[ext_resource type="Texture2D" uid="uid://dagtrmss533pr" path="res://bombman/player_down_walk2.png" id="7_kqi4c"]
+[ext_resource type="Texture2D" uid="uid://cv7a0geuj0jpu" path="res://bombman/player_down_walk3.png" id="8_1jh6k"]
+[ext_resource type="Texture2D" uid="uid://clpvesu8y8lbr" path="res://bombman/player_left_walk3.png" id="9_ec5x0"]
+[ext_resource type="Texture2D" uid="uid://cbbkonmelb6kv" path="res://bombman/player_left_walk1.png" id="10_s6nbx"]
+[ext_resource type="Texture2D" uid="uid://demr7qn1xra0a" path="res://bombman/player_right_walk1.png" id="11_tqtlw"]
+[ext_resource type="Texture2D" uid="uid://cse4hpfonqqpo" path="res://bombman/player_right_walk3.png" id="12_gaq4e"]
+[ext_resource type="Texture2D" uid="uid://dyc7svm3dax5j" path="res://bombman/player_up_walk1.png" id="13_n3i2s"]
+[ext_resource type="Texture2D" uid="uid://cxl2bxjuupmcf" path="res://bombman/player_up_walk2.png" id="14_lax8w"]
+[ext_resource type="Texture2D" uid="uid://bs28ql45d6vhy" path="res://bombman/player_up_walk3.png" id="15_cn67k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cx2h6"]
+size = Vector2(10.2855, 15.5385)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6uvw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nnkqi")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lqrlv")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_g1dkv")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_5j3iq")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gv8dg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kqi4c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1jh6k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kqi4c")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ec5x0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_s6nbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lqrlv")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_tqtlw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g1dkv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_gaq4e")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_n3i2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_lax8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_cn67k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5j3iq")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 9.0
+}]
+
+[node name="Player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(1, 0)
+script = ExtResource("1_roh7o")
+speed = 120.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.500011, -2)
+rotation = -3.14159
+scale = Vector2(5.34732, -5.66334)
+shape = SubResource("RectangleShape2D_cx2h6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_o6uvw")
+animation = &"idle_down"
+frame_progress = 0.266283

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://u6e11gt8xvgn"]
+
+[ext_resource type="Script" path="res://Menu.cs" id="1_bjq8r"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bjq8r")
+
+[node name="GameName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 151.0
+offset_right = 528.0
+offset_bottom = 174.0
+scale = Vector2(3.04, 2.88)
+text = "Bomberman"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 462.0
+offset_top = 341.0
+offset_right = 508.0
+offset_bottom = 372.0
+scale = Vector2(4.97034, 4.38733)
+text = "Start"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
