@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bs28ql45d6vhy" path="res://bombman/player_up_walk3.png" id="15_cn67k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cx2h6"]
-size = Vector2(10.2855, 15.5385)
+size = Vector2(10.2855, 13.7728)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o6uvw"]
 animations = [{
@@ -124,7 +124,7 @@ script = ExtResource("1_roh7o")
 speed = 120.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0.500011, -2)
+position = Vector2(0.500003, 1)
 rotation = -3.14159
 scale = Vector2(5.34732, -5.66334)
 shape = SubResource("RectangleShape2D_cx2h6")
