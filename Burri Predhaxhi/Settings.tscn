@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://bes8w3knnrkpq"]
+
+[ext_resource type="Script" path="res://Settings.cs" id="1_7ks0f"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qkhw5"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7ks0f")
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 500.0
+offset_right = 282.0
+offset_bottom = 574.0
+button_pressed = true
+button_mask = 5
+text = "Game Sound"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 73.0
+offset_right = 296.0
+offset_bottom = 104.0
+keep_pressed_outside = true
+item_count = 2
+popup/item_0/text = "One Player"
+popup/item_0/icon = SubResource("CanvasTexture_qkhw5")
+popup/item_0/id = 0
+popup/item_1/text = "Two Players"
+popup/item_1/id = 1
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 271.0
+offset_right = 358.0
+offset_bottom = 302.0
+placeholder_text = "first player'name"
+alignment = 1
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="LineEdit2" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 324.0
+offset_right = 364.0
+offset_bottom = 355.0
+placeholder_text = "seconed player'name"
+alignment = 1
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false

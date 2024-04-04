@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2xm5rpftfmbo"]
+
+[ext_resource type="Texture2D" uid="uid://bfevdhxg40xi3" path="res://exitdoor.png" id="1_rw3xs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t57ec"]
+
+[node name="Exit" type="Area2D" groups=["exit"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rw3xs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_t57ec")
