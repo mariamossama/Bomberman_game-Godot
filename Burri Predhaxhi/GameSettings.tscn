@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bes8w3knnrkpq"]
 
-[ext_resource type="Script" path="res://Settings.cs" id="1_7ks0f"]
+[ext_resource type="Script" path="res://GameSettings2.cs" id="1_01vuo"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_qkhw5"]
 
-[node name="Settings" type="Control"]
+[node name="GameSettings" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_7ks0f")
+script = ExtResource("1_01vuo")
 
 [node name="CheckBox" type="CheckBox" parent="."]
 layout_mode = 0

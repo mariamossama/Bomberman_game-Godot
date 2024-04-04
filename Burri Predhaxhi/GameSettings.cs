@@ -1,34 +1,35 @@
 using Godot;
 using System;
 
-public class Settings : Control
+public partial class GameSettings2 : Control
 {
 	private OptionButton playerOptionButton;
 	private LineEdit firstPlayerNameEdit;
 	private LineEdit secondPlayerNameEdit;
-
+	private bool isTwoPlayers;
+	
+	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// Assign the nodes to the variables
+		isTwoPlayers = false;
 		playerOptionButton = GetNode<OptionButton>("OptionButton");
 		firstPlayerNameEdit = GetNode<LineEdit>("LineEdit");
 		secondPlayerNameEdit = GetNode<LineEdit>("LineEdit2");
 
-		// Add items to the OptionButton
 		playerOptionButton.AddItem("One Player", 1);
 		playerOptionButton.AddItem("Two Players", 2);
 
-		// Connect the option selected signal to the method
-		playerOptionButton.Connect("item_selected", this, nameof(OnPlayerOptionSelected));
+		// Use the observer pattern to deal with Signals (https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_signals.html)
+		playerOptionButton.ItemSelected += (item) => this.OnPlayerOptionSelected(item);
 
 		// Initially set to one player
 		OnPlayerOptionSelected(1);
 	}
 
-	private void OnPlayerOptionSelected(int index)
+	private void OnPlayerOptionSelected(long index)
 	{
 		// Toggle visibility of the second name input based on selection
-		bool isTwoPlayers = index == 2;
+		isTwoPlayers = index == 2;
 		secondPlayerNameEdit.Visible = isTwoPlayers;
 		
 		// If only one player, disable the second input and clear it
@@ -38,7 +39,6 @@ public class Settings : Control
 		}
 	}
 
-	// This method can be connected to a "Start Game" button to use the names entered
 	public void StartGame()
 	{
 		string firstPlayerName = firstPlayerNameEdit.Text;
@@ -51,12 +51,11 @@ public class Settings : Control
 		}
 		
 		// Here you can initiate the game with one or two players
+		
 	}
-	
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
 }
-
-
