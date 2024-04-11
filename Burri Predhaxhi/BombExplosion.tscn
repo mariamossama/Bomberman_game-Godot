@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciexsdlf1tplb"]
+
+[ext_resource type="PackedScene" uid="uid://cqcqeyiw38xmr" path="res://Bomb.tscn" id="1_crtbf"]
+[ext_resource type="Script" path="res://BombExplosion.cs" id="1_t2a6a"]
+[ext_resource type="PackedScene" uid="uid://dmuvevjbndrta" path="res://Explosion.tscn" id="2_1fyil"]
+
+[node name="BombExplosion" type="Node2D"]
+top_level = true
+position = Vector2(0, 1)
+script = ExtResource("1_t2a6a")
+
+[node name="Bomb" parent="." instance=ExtResource("1_crtbf")]
+
+[node name="Explosion" parent="." instance=ExtResource("2_1fyil")]
+
+[node name="ExplosionStartTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="ExplosionStartTimer" to="." method="OnExplosionStartTimerTimeout"]

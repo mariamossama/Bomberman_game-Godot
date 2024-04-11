@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://4hcetcm4fv1n"]
+[gd_scene load_steps=4 format=3 uid="uid://4hcetcm4fv1n"]
 
 [ext_resource type="PackedScene" uid="uid://tavkt8aodbff" path="res://LevelFloor.tscn" id="1_4nk0g"]
+[ext_resource type="PackedScene" uid="uid://ciexsdlf1tplb" path="res://BombExplosion.tscn" id="1_ubhyo"]
 [ext_resource type="PackedScene" uid="uid://bgfavc6m175gi" path="res://Player.tscn" id="2_wrqti"]
 
 [node name="TestLevel" type="Node2D"]
+
+[node name="BombExplosion" parent="." instance=ExtResource("1_ubhyo")]
+position = Vector2(428, 179)
 
 [node name="LevelFloor" parent="." instance=ExtResource("1_4nk0g")]
 position = Vector2(550, 299)

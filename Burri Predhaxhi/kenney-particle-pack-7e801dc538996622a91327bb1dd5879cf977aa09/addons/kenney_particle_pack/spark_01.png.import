@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu220bqq0lqkw"
-path="res://.godot/imported/PTP-Tile_05-512x512.png-d95575c74746cecdcfaee875b98b6604.ctex"
+uid="uid://qxp22gg07qh5"
+path="res://.godot/imported/spark_01.png-40676c765c7422fe462255eb4f94f765.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PTP-Tile_05-512x512.png"
-dest_files=["res://.godot/imported/PTP-Tile_05-512x512.png-d95575c74746cecdcfaee875b98b6604.ctex"]
+source_file="res://kenney-particle-pack-7e801dc538996622a91327bb1dd5879cf977aa09/addons/kenney_particle_pack/spark_01.png"
+dest_files=["res://.godot/imported/spark_01.png-40676c765c7422fe462255eb4f94f765.ctex"]
 
 [params]
 

@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqcqeyiw38xmr"]
+
+[ext_resource type="Script" path="res://Bomb.cs" id="1_au163"]
+[ext_resource type="Texture2D" uid="uid://dcm048qqtm8tc" path="res://bombman/bomb3.png" id="2_ymqud"]
+[ext_resource type="Texture2D" uid="uid://df77cgqamhab8" path="res://bombman/bomb2.png" id="3_1so3b"]
+[ext_resource type="Texture2D" uid="uid://d4c1tmme6d6ov" path="res://bombman/bomb1.png" id="4_temy7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jlemi"]
+radius = 18.0
+height = 36.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ijmi3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ymqud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1so3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_temy7")
+}],
+"loop": true,
+"name": &"bomb1",
+"speed": 6.0
+}]
+
+[node name="Bomb" type="RigidBody2D"]
+disable_mode = 1
+gravity_scale = 0.0
+script = ExtResource("1_au163")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 2)
+shape = SubResource("CapsuleShape2D_jlemi")
+
+[node name="BombAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ijmi3")
+animation = &"bomb1"
+frame = 1
+frame_progress = 0.329356
+
+[node name="BombTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="BombTimer" to="." method="OnBombTimerTimeout"]
