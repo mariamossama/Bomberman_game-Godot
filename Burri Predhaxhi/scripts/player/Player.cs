@@ -52,12 +52,12 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 	}
 	
-	private void PlaceBomb(){
-		var bomb = new Bomb();
-		var p = Position;
-		bomb.Position = p;
-		GetParent().AddChild(bomb);
-	}
+	// private void PlaceBomb(){
+	// 	var bomb = new Bomb();
+	// 	var p = Position;
+	// 	bomb.Position = p;
+	// 	GetParent().AddChild(bomb);
+	// }
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -65,11 +65,11 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 	}
 	
-	public override void _Input(InputEvent @event)
-	{	
-		if (@event.IsActionPressed("place_bomb"))
-  		{
-			PlaceBomb();
-		}
-	}
+	// public override void _Input(InputEvent @event)
+	// {	
+	// 	if (@event.IsActionPressed("place_bomb"))
+  	// 	{
+	// 		PlaceBomb();
+	// 	}
+	// }
 }
