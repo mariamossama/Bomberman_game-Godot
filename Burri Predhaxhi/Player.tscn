@@ -1,13 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://bgfavc6m175gi"]
+[gd_scene load_steps=25 format=3 uid="uid://bgfavc6m175gi"]
 
 [ext_resource type="Script" path="res://scripts/player/Player.cs" id="1_4iakv"]
 [ext_resource type="Texture2D" uid="uid://g50f1uko4kc0" path="res://bombman/player_down.png" id="2_nnkqi"]
+[ext_resource type="Texture2D" uid="uid://bkbneewa21o23" path="res://bombman/animation_die1.png" id="2_u6awf"]
 [ext_resource type="Texture2D" uid="uid://cxphgodm6jpmt" path="res://bombman/player_left.png" id="3_lqrlv"]
+[ext_resource type="Texture2D" uid="uid://6rrttrswn8bo" path="res://bombman/animation_die2.png" id="3_sg5dd"]
 [ext_resource type="Texture2D" uid="uid://dr3xybgpjede8" path="res://bombman/player_right.png" id="4_g1dkv"]
+[ext_resource type="Texture2D" uid="uid://mntqqu6j60io" path="res://bombman/animation_die3.png" id="4_sflfq"]
 [ext_resource type="Texture2D" uid="uid://s0yd8qa27hko" path="res://bombman/player_up.png" id="5_5j3iq"]
+[ext_resource type="Texture2D" uid="uid://dp45dksrkm1gn" path="res://bombman/animation_die4.png" id="5_rjt4d"]
 [ext_resource type="Texture2D" uid="uid://c511xerca6gfe" path="res://bombman/player_down_walk1.png" id="6_gv8dg"]
+[ext_resource type="Texture2D" uid="uid://dg6t0ds8ikt4s" path="res://bombman/animation_die5.png" id="6_rur1u"]
+[ext_resource type="Texture2D" uid="uid://b2uwtw585sqo7" path="res://bombman/animation_die7.png" id="7_i3ukk"]
 [ext_resource type="Texture2D" uid="uid://dagtrmss533pr" path="res://bombman/player_down_walk2.png" id="7_kqi4c"]
 [ext_resource type="Texture2D" uid="uid://cv7a0geuj0jpu" path="res://bombman/player_down_walk3.png" id="8_1jh6k"]
+[ext_resource type="Texture2D" uid="uid://dc1qmxm7tb3ip" path="res://bombman/animation_die6.png" id="8_r68s8"]
 [ext_resource type="Texture2D" uid="uid://clpvesu8y8lbr" path="res://bombman/player_left_walk3.png" id="9_ec5x0"]
 [ext_resource type="Texture2D" uid="uid://cbbkonmelb6kv" path="res://bombman/player_left_walk1.png" id="10_s6nbx"]
 [ext_resource type="Texture2D" uid="uid://demr7qn1xra0a" path="res://bombman/player_right_walk1.png" id="11_tqtlw"]
@@ -18,6 +25,32 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o6uvw"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u6awf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sg5dd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sflfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rjt4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rur1u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_i3ukk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_r68s8")
+}],
+"loop": false,
+"name": &"die",
+"speed": 2.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_nnkqi")
@@ -137,3 +170,5 @@ position = Vector2(9.15347e-05, -1.00003)
 rotation = -3.14159
 scale = Vector2(5.34732, -5.66334)
 shape = SubResource("RectangleShape2D_cx2h6")
+
+[connection signal="animation_finished" from="Area2D/AnimatedSprite2D" to="." method="OnAnimationFinished"]

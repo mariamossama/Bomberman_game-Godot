@@ -5,12 +5,14 @@ public partial class Player : CharacterBody2D, IDestroyable
 {
 	[Export]
 	public int Speed { get; set; } = 100;
-	//private Bomb
+	public bool dead = false;
+
 	private Vector2 velocity;
 	private AnimatedSprite2D animationSprite;
 	
 	public void Destroy() {
 		GD.Print("Ocmuqinena");
+		dead = true;
 	}
 	
 	public override void _Ready()
@@ -36,7 +38,10 @@ public partial class Player : CharacterBody2D, IDestroyable
 	}
 	
 	private void changeAnimation(Vector2 direction) {
-		if (direction == Vector2.Right) {
+		if (dead) {
+			animationSprite.Play("die");
+		}
+		else if (direction == Vector2.Right) {
 			animationSprite.Play("walk_right");
 		} else if (direction == Vector2.Left) {
 			animationSprite.Play("walk_left");
@@ -50,6 +55,13 @@ public partial class Player : CharacterBody2D, IDestroyable
 			animationSprite.Play(k.Replace("walk","idle"));
 		}
 
+	}
+
+	private void OnAnimationFinished(){
+		if (dead){
+			QueueFree();
+			//TODO: write a restart method
+		}
 	}
 	
 	// private void PlaceBomb(){
