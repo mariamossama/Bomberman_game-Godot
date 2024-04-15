@@ -17,7 +17,7 @@ public partial class Level : Node2D
 		if (Input.IsActionJustPressed("place_bomb")){
 			var bombInstance = (Node2D) bombScene.Instantiate();
 			var playerPos = GetNode<CharacterBody2D>("Player").Position;
-
+			
 			bombInstance.Position = playerPos;
 			AddChild(bombInstance);
 		}

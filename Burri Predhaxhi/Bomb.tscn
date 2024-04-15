@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dmuvevjbndrta" path="res://Explosion.tscn" id="5_w8245"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jlemi"]
-radius = 18.0
-height = 36.0
+radius = 20.0
+height = 42.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ijmi3"]
 animations = [{
@@ -30,17 +30,9 @@ animations = [{
 [node name="Bomb" type="RigidBody2D"]
 disable_mode = 1
 gravity_scale = 0.0
+max_contacts_reported = 3
+contact_monitor = true
 script = ExtResource("1_muphe")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 2)
-shape = SubResource("CapsuleShape2D_jlemi")
-
-[node name="BombAnimation" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ijmi3")
-animation = &"bomb1"
-frame = 1
-frame_progress = 0.329356
 
 [node name="BombTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -58,6 +50,23 @@ autostart = true
 
 [node name="Explosion" parent="." instance=ExtResource("5_w8245")]
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 2)
+shape = SubResource("CapsuleShape2D_jlemi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 2)
+shape = SubResource("CapsuleShape2D_jlemi")
+
+[node name="BombAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ijmi3")
+animation = &"bomb1"
+frame = 1
+frame_progress = 0.329356
+
 [connection signal="timeout" from="BombTimer" to="." method="OnBombTimerTimeout"]
 [connection signal="timeout" from="ExplosionEndedTimer" to="." method="OnExplosionEndedTimerTimeout"]
 [connection signal="timeout" from="ExplosionStartTimer" to="." method="OnExplosionStartTimerTimeout"]
+[connection signal="body_exited" from="Area2D" to="." method="OnBodyExited"]
