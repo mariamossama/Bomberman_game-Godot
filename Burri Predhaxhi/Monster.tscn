@@ -1,0 +1,136 @@
+[gd_scene load_steps=20 format=3 uid="uid://c3oogdy0eygrc"]
+
+[ext_resource type="Script" path="res://scripts/Monster.cs" id="1_tqo5u"]
+[ext_resource type="Texture2D" uid="uid://g50f1uko4kc0" path="res://bombman/player_down.png" id="8_g4and"]
+[ext_resource type="Texture2D" uid="uid://cxphgodm6jpmt" path="res://bombman/player_left.png" id="9_kop3b"]
+[ext_resource type="Texture2D" uid="uid://dr3xybgpjede8" path="res://bombman/player_right.png" id="10_12hh2"]
+[ext_resource type="Texture2D" uid="uid://s0yd8qa27hko" path="res://bombman/player_up.png" id="11_inm2d"]
+[ext_resource type="Texture2D" uid="uid://co0lovgjdub12" path="res://bombman/Blue_Back1.png" id="13_sssk0"]
+[ext_resource type="Texture2D" uid="uid://b8ib6m3cs5s71" path="res://bombman/animation_skeleton5.png" id="13_vg63y"]
+[ext_resource type="Texture2D" uid="uid://cnxt7jh2s34s1" path="res://bombman/Blue_Left1.png" id="14_nhcex"]
+[ext_resource type="Texture2D" uid="uid://uocsfjcda3cp" path="res://bombman/animation_skeleton6.png" id="14_qu4e2"]
+[ext_resource type="Texture2D" uid="uid://cmfv3px8yt1tp" path="res://bombman/Blue_Right1.png" id="15_bxyjk"]
+[ext_resource type="Texture2D" uid="uid://do3acdl1koavs" path="res://bombman/animation_skeleton4.png" id="15_ou4uv"]
+[ext_resource type="Texture2D" uid="uid://bk3uw3uqb3ah3" path="res://bombman/Blue_Front1.png" id="16_ftter"]
+[ext_resource type="Texture2D" uid="uid://bi4rg8dowor5o" path="res://bombman/animation_skeleton7.png" id="16_os6gb"]
+[ext_resource type="Texture2D" uid="uid://baoqpse75jd6c" path="res://bombman/animation_skeleton8.png" id="17_8vmi1"]
+[ext_resource type="Texture2D" uid="uid://cyr01dp0oajvw" path="res://bombman/animation_skeleton9.png" id="18_1si7j"]
+[ext_resource type="Texture2D" uid="uid://dc83oqac084is" path="res://bombman/animation_skeleton10.png" id="19_iipbw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4eby8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_ou4uv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_vg63y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qu4e2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_os6gb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_8vmi1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_1si7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_iipbw")
+}],
+"loop": false,
+"name": &"die",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_g4and")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_kop3b")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_12hh2")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_inm2d")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_sssk0")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_nhcex")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_bxyjk")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_ftter")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8q2bf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b5mb"]
+size = Vector2(38.5, 45.5)
+
+[node name="Monster" type="CharacterBody2D"]
+script = ExtResource("1_tqo5u")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(-4, -4)
+scale = Vector2(0.314492, 0.347705)
+sprite_frames = SubResource("SpriteFrames_4eby8")
+animation = &"walk_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8q2bf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.75, 2)
+shape = SubResource("RectangleShape2D_0b5mb")
+
+
