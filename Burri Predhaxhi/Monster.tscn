@@ -124,7 +124,7 @@ script = ExtResource("1_tqo5u")
 position = Vector2(-4, -4)
 scale = Vector2(0.314492, 0.347705)
 sprite_frames = SubResource("SpriteFrames_4eby8")
-animation = &"walk_up"
+animation = &"walk_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_8q2bf")
@@ -133,4 +133,4 @@ shape = SubResource("RectangleShape2D_8q2bf")
 position = Vector2(-4.75, 2)
 shape = SubResource("RectangleShape2D_0b5mb")
 
-
+[connection signal="animation_finished" from="Area2D/AnimatedSprite2D" to="." method="OnAnimationFinished"]
