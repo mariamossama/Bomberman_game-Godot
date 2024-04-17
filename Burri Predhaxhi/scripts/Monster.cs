@@ -59,12 +59,14 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	private void ChangeAnimation(Vector2 direction)
 	{
 		if (direction.X > 0)
-		{
-			animationSprite.Play("walk_right");
+		{	
+			animationSprite.FlipH = true;
+			animationSprite.Play("walk_side");
 		}
 		else if (direction.X < 0)
 		{
-			animationSprite.Play("walk_left");
+			animationSprite.FlipH = false;
+			animationSprite.Play("walk_side");
 		}
 		else if (direction.Y > 0)
 		{
