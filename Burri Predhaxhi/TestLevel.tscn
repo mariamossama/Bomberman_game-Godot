@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bgfavc6m175gi" path="res://Player.tscn" id="2_wrqti"]
 [ext_resource type="PackedScene" uid="uid://c3oogdy0eygrc" path="res://Monster.tscn" id="4_1drew"]
 
-[node name="TestLevel" type="Node2D"]
+[node name="TestLevel" type="Node2D" groups=["respawnable"]]
 script = ExtResource("1_qlxil")
 
 [node name="LevelFloor" parent="." instance=ExtResource("1_4nk0g")]
@@ -32,3 +32,5 @@ scale = Vector2(0.55, 0.55)
 [node name="Monster" parent="." instance=ExtResource("4_1drew")]
 position = Vector2(627, 174)
 scale = Vector2(0.27, 0.27)
+
+[connection signal="PlayerWasRemoved" from="Player" to="." method="OnPlayerWasRemoved"]

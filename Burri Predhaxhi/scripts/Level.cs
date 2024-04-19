@@ -4,9 +4,12 @@ using System;
 public partial class Level : Node2D
 {
 	PackedScene bombScene;
+	private int numOfPlayers;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		//TODO: the number of players shouldn't be hardcoded but be determined by the menu
+		numOfPlayers = 1;
 		bombScene = GD.Load<PackedScene>( "res://Bomb.tscn");
 	}
 
@@ -22,10 +25,27 @@ public partial class Level : Node2D
 			AddChild(bombInstance);
 		}
 
+		
 
+
+	}
+
+	public void RestartGame(){
+		GetTree().ReloadCurrentScene(); //FIXME
+	}
+	
+	
+	private void OnPlayerWasRemoved()
+	{
+		numOfPlayers--;
+		if (numOfPlayers == 0){
+			RestartGame();
+		}
 	}
 	
 }
+
+
 
 
 

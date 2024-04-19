@@ -9,7 +9,7 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	private AnimatedSprite2D animationSprite;
 	private Random random = new Random();
 	private double timeSinceLastDirectionChange = 0f;
-	private double directionChangeInterval = 1f; // Time in seconds to change direction
+	private double directionChangeInterval = 1f; 
 	public bool dead = false;
 
 	public void Destroy() 
@@ -82,8 +82,7 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	{
 		if (dead)
 		{
-			QueueFree(); // Remove the monster from the scene
-			// Optionally, trigger a respawn or level reset here
+			QueueFree();
 		}
 	}
 }

@@ -9,6 +9,9 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 	private Vector2 velocity;
 	private AnimatedSprite2D animationSprite;
+
+	 [Signal]
+	 public delegate void PlayerWasRemovedEventHandler();
 	
 	public void Destroy() {
 		GD.Print("Ocmuqinena");
@@ -60,28 +63,22 @@ public partial class Player : CharacterBody2D, IDestroyable
 	private void OnAnimationFinished(){
 		if (dead){
 			QueueFree();
-			//TODO: write a restart method
+			//TODO: write a restart method, logic will change when there are more players
+			
 		}
 	}
 	
-	// private void PlaceBomb(){
-	// 	var bomb = new Bomb();
-	// 	var p = Position;
-	// 	bomb.Position = p;
-	// 	GetParent().AddChild(bomb);
-	// }
-	
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 
 	}
 	
-	// public override void _Input(InputEvent @event)
-	// {	
-	// 	if (@event.IsActionPressed("place_bomb"))
-  	// 	{
-	// 		PlaceBomb();
-	// 	}
-	// }
+	private void OnTreeExited()
+	{
+		EmitSignal(SignalName.PlayerWasRemoved);
+	}
+	
 }
+
+
+

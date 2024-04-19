@@ -39,6 +39,8 @@ public partial class ExplosionFlame : Node2D
 			var destroyable = (IDestroyable) body;
 			destroyable.Destroy();
 		}
+		
+		
 	}
 	
 
