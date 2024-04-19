@@ -18,7 +18,7 @@ public partial class Level : Node2D
 		bombScene = GD.Load<PackedScene>( "res://Bomb.tscn");
 		playerScene = GD.Load<PackedScene>("res://Player.tscn"); //to be used in respawn
 		tileMap = GetNode<Node2D>("LevelFloor").GetNode<TileMap>("TileMap");
-		
+		SpawnPlayers();
 	}
 
 	public override void _Process(double delta)
@@ -35,16 +35,18 @@ public partial class Level : Node2D
 	}
 
 	public Vector2 convertedCoords(int x,int y){ //overloaded for ease of use 
-		return ToGlobal(tileMap.MapToLocal(new Vector2I(x, y))); //in case you like using coordinates as ints more
+		return tileMap.ToGlobal(tileMap.MapToLocal(new Vector2I(x, y))); //in case you like using coordinates as ints more
 	}
 
 	public Vector2 convertedCoords(Vector2I pos){
-		return ToGlobal(tileMap.MapToLocal(pos));
+		return tileMap.ToGlobal(tileMap.MapToLocal(pos));
 	}
 
-	private void ReSpawnPlayers(){ //FIXME: currently just 1 player
-		var playerInstance = (Node2D) playerScene.Instantiate();
-		playerInstance.Position = convertedCoords(initialPlayerPos); //????
+	private void SpawnPlayers(){ //FIXME: currently just 1 player
+		var playerInstance = (Player) playerScene.Instantiate();
+		GD.Print(ToLocal(convertedCoords(initialPlayerPos)));
+		playerInstance.PlayerWasRemoved += OnPlayerWasRemoved;
+		playerInstance.Position = ToLocal(convertedCoords(initialPlayerPos)); //????
 		AddChild(playerInstance);
 	}
 	
@@ -56,7 +58,7 @@ public partial class Level : Node2D
 	{
 		numOfPlayers--;
 		if (numOfPlayers == 0){
-			ReSpawnPlayers();
+			SpawnPlayers();
 			SpawnMonsters();
 		}
 	}
