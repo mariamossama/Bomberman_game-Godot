@@ -4,16 +4,23 @@ using System;
 public partial class Level : Node2D
 {
 	PackedScene bombScene;
+	PackedScene playerScene;
 	private int numOfPlayers;
-	// Called when the node enters the scene tree for the first time.
+
+	TileMap tileMap;
+	Vector2I initialPlayerPos;
+
 	public override void _Ready()
 	{
+		initialPlayerPos = new Vector2I(-5,-5);
 		//TODO: the number of players shouldn't be hardcoded but be determined by the menu
 		numOfPlayers = 1;
 		bombScene = GD.Load<PackedScene>( "res://Bomb.tscn");
+		playerScene = GD.Load<PackedScene>("res://Player.tscn"); //to be used in respawn
+		tileMap = GetNode<Node2D>("LevelFloor").GetNode<TileMap>("TileMap");
+		
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 
@@ -25,21 +32,32 @@ public partial class Level : Node2D
 			AddChild(bombInstance);
 		}
 
-		
-
-
 	}
 
-	public void RestartGame(){
-		GetTree().ReloadCurrentScene(); //FIXME
+	public Vector2 convertedCoords(int x,int y){ //overloaded for ease of use 
+		return ToGlobal(tileMap.MapToLocal(new Vector2I(x, y))); //in case you like using coordinates as ints more
+	}
+
+	public Vector2 convertedCoords(Vector2I pos){
+		return ToGlobal(tileMap.MapToLocal(pos));
+	}
+
+	private void ReSpawnPlayers(){ //FIXME: currently just 1 player
+		var playerInstance = (Node2D) playerScene.Instantiate();
+		playerInstance.Position = convertedCoords(initialPlayerPos); //????
+		AddChild(playerInstance);
 	}
 	
+	private void SpawnMonsters(){
+
+	}
 	
 	private void OnPlayerWasRemoved()
 	{
 		numOfPlayers--;
 		if (numOfPlayers == 0){
-			RestartGame();
+			ReSpawnPlayers();
+			SpawnMonsters();
 		}
 	}
 	

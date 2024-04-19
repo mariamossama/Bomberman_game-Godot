@@ -41,9 +41,7 @@ public partial class Bomb : RigidBody2D
 
 	private void OnBodyExited(Node2D body)
 	{	
-		GD.Print("hika");
 		if (body is IDestroyable){
-			GD.Print("dola");
 			player = GetParent().GetNode<CharacterBody2D>("Player");
 			RemoveCollisionExceptionWith(player);
 		}

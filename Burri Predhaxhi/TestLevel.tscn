@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bgfavc6m175gi" path="res://Player.tscn" id="2_wrqti"]
 [ext_resource type="PackedScene" uid="uid://c3oogdy0eygrc" path="res://Monster.tscn" id="4_1drew"]
 
-[node name="TestLevel" type="Node2D" groups=["respawnable"]]
+[node name="TestLevel" type="Node2D"]
 script = ExtResource("1_qlxil")
 
 [node name="LevelFloor" parent="." instance=ExtResource("1_4nk0g")]
@@ -25,12 +25,9 @@ offset_bottom = 40.0
 scale = Vector2(6.32, 16.16)
 color = Color(0.188235, 0.219608, 0.254902, 1)
 
-[node name="Player" parent="." instance=ExtResource("2_wrqti")]
-position = Vector2(326, 78)
-scale = Vector2(0.55, 0.55)
-
-[node name="Monster" parent="." instance=ExtResource("4_1drew")]
+[node name="Monster" parent="." groups=["respawnable"] instance=ExtResource("4_1drew")]
 position = Vector2(627, 174)
 scale = Vector2(0.27, 0.27)
 
-[connection signal="PlayerWasRemoved" from="Player" to="." method="OnPlayerWasRemoved"]
+[node name="Player" parent="." instance=ExtResource("2_wrqti")]
+position = Vector2(325, 75)
