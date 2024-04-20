@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://4hcetcm4fv1n"]
+[gd_scene load_steps=3 format=3 uid="uid://4hcetcm4fv1n"]
 
 [ext_resource type="PackedScene" uid="uid://tavkt8aodbff" path="res://LevelFloor.tscn" id="1_4nk0g"]
 [ext_resource type="Script" path="res://scripts/Level.cs" id="1_qlxil"]
-[ext_resource type="PackedScene" uid="uid://c3oogdy0eygrc" path="res://Monster.tscn" id="4_1drew"]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_qlxil")
@@ -23,7 +22,3 @@ offset_right = 939.0
 offset_bottom = 40.0
 scale = Vector2(6.32, 16.16)
 color = Color(0.188235, 0.219608, 0.254902, 1)
-
-[node name="Monster" parent="." groups=["respawnable"] instance=ExtResource("4_1drew")]
-position = Vector2(627, 174)
-scale = Vector2(0.27, 0.27)

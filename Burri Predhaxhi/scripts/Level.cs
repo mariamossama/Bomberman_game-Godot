@@ -1,14 +1,17 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class Level : Node2D
 {
 	PackedScene bombScene;
 	PackedScene playerScene;
+
+	PackedScene monsterScene;
 	private int numOfPlayers;
 
 	TileMap tileMap;
-	Vector2I initialPlayerPos;
+	Vector2I initialPlayerPos; //FIXME: should be an array of initial positions (3 positions)
 
 	public override void _Ready()
 	{
@@ -16,9 +19,11 @@ public partial class Level : Node2D
 		//TODO: the number of players shouldn't be hardcoded but be determined by the menu
 		numOfPlayers = 1;
 		bombScene = GD.Load<PackedScene>( "res://Bomb.tscn");
-		playerScene = GD.Load<PackedScene>("res://Player.tscn"); //to be used in respawn
+		playerScene = GD.Load<PackedScene>("res://Player.tscn");
+		monsterScene = GD.Load<PackedScene>("res://Monster.tscn");
 		tileMap = GetNode<Node2D>("LevelFloor").GetNode<TileMap>("TileMap");
 		SpawnPlayers();
+		SpawnMonsters();
 	}
 
 	public override void _Process(double delta)
@@ -50,8 +55,22 @@ public partial class Level : Node2D
 		AddChild(playerInstance);
 	}
 	
-	private void SpawnMonsters(){
+	private void SpawnMonsters(){ //generalize for multiple monsters (create multiple instances)
+		//available coordinates for spawning: floor tiles with x > -1, y > -2
+		//decided arbitrarily so that monsters do not spawn very close to the player
+		//atlas id for floor tiles: (0,4)
+		int XBound = -1;
+		int YBound = -2;
+		var availableTiles = tileMap.GetUsedCellsById(0, -1, new Vector2I(0,4))
+				.Where(vec => vec.X > XBound && vec.Y > YBound).ToList<Vector2I>();
 
+		Vector2I randomAvailCoordinate = availableTiles[(int) GD.Randi() % (availableTiles.Count-1)];
+		
+		var monsterInstance = (Monster) monsterScene.Instantiate();
+
+		monsterInstance.Position = ToLocal(convertedCoords(randomAvailCoordinate));
+
+		AddChild(monsterInstance);
 	}
 	
 	private void OnPlayerWasRemoved()

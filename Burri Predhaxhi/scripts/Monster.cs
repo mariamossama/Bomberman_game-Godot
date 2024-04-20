@@ -7,7 +7,7 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	public int Speed { get; set; } = 100;
 	private Vector2 velocity;
 	private AnimatedSprite2D animationSprite;
-	private Random random = new Random();
+	private Random random; //use GD.Randi() instead 
 	private double timeSinceLastDirectionChange = 0f;
 	private double directionChangeInterval = 1f; 
 	public bool dead = false;
@@ -28,9 +28,10 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	{
 		if (dead) 
 		{
-			// If the monster is dead, we don't want it to keep moving.
-			return;
+			return; //??? 
 		}
+
+		//move in units
 
 		timeSinceLastDirectionChange += delta;
 
@@ -53,8 +54,17 @@ public partial class Monster : CharacterBody2D, IDestroyable
 			case 1: velocity = new Vector2(-1, 0); break; // Left
 			case 2: velocity = new Vector2(0, 1); break; // Down
 			case 3: velocity = new Vector2(0, -1); break; // Up
-		}
+		} // old + there are enums for directions
+
+		Vector2[] directions = {Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right};
+
+		//if coordinates both even: pick randomly from 4 directions
+		// if x even, y odd, 2 directions: left, right
+		// if x odd, y even, 2 direction: up, down
+
 	}
+
+
 
 	private void ChangeAnimation(Vector2 direction)
 	{
