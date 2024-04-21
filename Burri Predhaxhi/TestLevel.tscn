@@ -35,3 +35,6 @@ position = Vector2(408, 264)
 
 [node name="Box2" parent="." instance=ExtResource("4_sbsjm")]
 position = Vector2(512, 152)
+
+[node name="Box3" parent="." instance=ExtResource("4_sbsjm")]
+position = Vector2(411, 157)

@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://ciexsdlf1tplb"]
 
 [ext_resource type="PackedScene" uid="uid://cqcqeyiw38xmr" path="res://Bomb.tscn" id="1_crtbf"]
-[ext_resource type="Script" path="res://scripts/bomb_explosion/BombExplosion.cs" id="1_csbxl"]
+[ext_resource type="Script" path="res://scripts/bomb_explosion/Explosion.cs" id="1_csbxl"]
 [ext_resource type="PackedScene" uid="uid://dmuvevjbndrta" path="res://Explosion.tscn" id="2_1fyil"]
+
 
 [node name="BombExplosion" type="Node2D"]
 top_level = true
