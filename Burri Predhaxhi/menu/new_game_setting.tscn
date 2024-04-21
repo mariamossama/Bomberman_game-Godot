@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://4dbkhbcu30ep"]
+
+[ext_resource type="Script" path="res://menu/new_game_setting.cs" id="1_o1j77"]
+[ext_resource type="FontFile" uid="uid://c0pbtrtjakd3t" path="res://Fonts/bm.ttf" id="1_vudhp"]
+
+[node name="NewGameSetting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o1j77")
+
+[node name="NopOption" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 632.0
+offset_top = 136.0
+offset_right = 976.0
+offset_bottom = 200.0
+
+[node name="NumOfPlayer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 152.0
+offset_right = 707.0
+offset_bottom = 192.0
+theme_override_fonts/font = ExtResource("1_vudhp")
+theme_override_font_sizes/font_size = 40
+text = "Number OF PLAYER:"
+
+[node name="MapSelect" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 264.0
+offset_right = 560.0
+offset_bottom = 344.0
+theme_override_fonts/font = ExtResource("1_vudhp")
+theme_override_font_sizes/font_size = 40
+text = "Map Selection:"
+
+[node name="Map1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 336.0
+offset_right = 512.0
+offset_bottom = 592.0
+theme_override_fonts/font = ExtResource("1_vudhp")
+theme_override_font_sizes/font_size = 70
+text = "Map1"
+
+[node name="Map2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 336.0
+offset_right = 1024.0
+offset_bottom = 592.0
+theme_override_fonts/font = ExtResource("1_vudhp")
+theme_override_font_sizes/font_size = 70
+text = "Map2"
+
+[node name="Map3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1152.0
+offset_top = 336.0
+offset_right = 1536.0
+offset_bottom = 592.0
+theme_override_fonts/font = ExtResource("1_vudhp")
+theme_override_font_sizes/font_size = 70
+text = "Map3"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 744.0
+offset_right = 1000.0
+offset_bottom = 864.0
+theme_override_fonts/font = ExtResource("1_vudhp")
+theme_override_font_sizes/font_size = 70
+text = "Start"
+icon_alignment = 1
+
+[node name="WinCond" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 656.0
+offset_right = 576.0
+offset_bottom = 752.0
+theme_override_fonts/font = ExtResource("1_vudhp")
+theme_override_font_sizes/font_size = 40
+text = "Winning Rounds: "
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 632.0
+offset_top = 640.0
+offset_right = 976.0
+offset_bottom = 704.0
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

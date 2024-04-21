@@ -64,10 +64,9 @@ public partial class Level : Node2D
 		var availableTiles = tileMap.GetUsedCellsById(0, -1, new Vector2I(0,4))
 				.Where(vec => vec.X > XBound && vec.Y > YBound).ToList<Vector2I>();
 
-		Vector2I randomAvailCoordinate = availableTiles[(int) GD.Randi() % (availableTiles.Count-1)];
-		
+		int randomIndex = (int) GD.Randi() % availableTiles.Count;
+		Vector2I randomAvailCoordinate = availableTiles[randomIndex];
 		var monsterInstance = (Monster) monsterScene.Instantiate();
-
 		monsterInstance.Position = ToLocal(convertedCoords(randomAvailCoordinate));
 
 		AddChild(monsterInstance);

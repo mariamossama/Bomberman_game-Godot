@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Menu : Control
+public partial class new_game_setting : Control
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -14,9 +14,11 @@ public partial class Menu : Control
 	}
 	private void _on_start_pressed()
 	{
-		var game = GD.Load<PackedScene>("res://play_menu.tscn").Instantiate();
-		GetTree().Root.AddChild(game);
+		var newgame = GD.Load<PackedScene>("res://Gaming.tscn").Instantiate();
+		GetTree().Root.AddChild(newgame);
 		Hide();
 	}
 }
+
+
 

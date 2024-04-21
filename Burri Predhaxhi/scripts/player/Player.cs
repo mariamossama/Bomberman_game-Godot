@@ -22,7 +22,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 	{
 		//this.speed = 100;
 		this.velocity = new Vector2();
-		this.animationSprite = GetNode<Area2D>("Area2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		this.animationSprite = GetNode<Area2D>("PlayerArea2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 	
 	public override void _PhysicsProcess(double _delta) {

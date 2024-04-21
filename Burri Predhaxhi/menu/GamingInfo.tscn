@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmjdml2uqg7l0"]
+
+[ext_resource type="FontFile" uid="uid://c0pbtrtjakd3t" path="res://Fonts/bm.ttf" id="1_uo52w"]
+
+[node name="GamingInfo" type="Node"]
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_left = 224.0
+offset_top = 24.0
+offset_right = 424.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("1_uo52w")
+theme_override_font_sizes/font_size = 50
+text = "0"
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 32.0
+offset_right = 194.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("1_uo52w")
+theme_override_font_sizes/font_size = 50
+text = "Time:"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1056.0
+offset_top = 32.0
+offset_right = 1232.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("1_uo52w")
+theme_override_font_sizes/font_size = 30
+text = "Setting"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 1256.0
+offset_top = 32.0
+offset_right = 1408.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("1_uo52w")
+theme_override_font_sizes/font_size = 30
+text = "Pause"
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 1432.0
+offset_top = 32.0
+offset_right = 1576.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("1_uo52w")
+theme_override_font_sizes/font_size = 30
+text = "Exit"
