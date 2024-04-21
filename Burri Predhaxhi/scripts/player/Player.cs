@@ -7,12 +7,27 @@ using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D, IDestroyable
 {
+	[Signal]
+	 public delegate void PlayerWasRemovedEventHandler();
+
+	//Player Property
 	[Export]
 	public int Speed { get; set; } = 100;
 	public bool dead = false;
-
+	//public int BombNum = 1;
+	//public int FlameSize = 1;
+	
+	//powerup
+	public int amountOfBombs = 1;
+	public int bombPowerUp = 0;
+	public int flamePowerUp = 0;
+	
+	private const string _BombResource = "res://Nodes/Bomb.tscn";
+	private PackedScene _packedSceneBomb;
+	
 	private Vector2 velocity;
 	private AnimatedSprite2D animationSprite;
+<<<<<<< HEAD
 	
 	 [Signal]
 	 public delegate void PlayerWasRemovedEventHandler();
@@ -26,6 +41,10 @@ public partial class Player : CharacterBody2D, IDestroyable
 	PackedScene bombScene;
 	
 	
+=======
+	
+
+>>>>>>> 69ab0201b97b9a8724c149db139d146990fcb3e8
 	public void Destroy() {
 		GD.Print("Ocmuqinena");
 		dead = true;
@@ -43,6 +62,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 		Vector2 direction = new Vector2(
 			Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left"),
 			Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
+			
 		);
 		
 		if (direction.Length() > 1) {
@@ -53,6 +73,39 @@ public partial class Player : CharacterBody2D, IDestroyable
 		changeAnimation(direction);
 		MoveAndSlide();
 		
+<<<<<<< HEAD
+=======
+		if (Input.IsActionPressed("place_bomb"))
+		{
+			_TryPlaceBomb();
+		}
+	}
+		// TODO:Send signal to game manager to spawn bombs
+	protected bool _TryPlaceBomb()
+	{
+		//if (amountOfBombs <= 0) { return false; };
+		//if (isJustLoaded) { return false; };
+		//Bomb newBomb = _packedSceneBomb.Instance() as Bomb;
+		//newBomb.Init(1 + (flamePowerUp * flamePowerUpValue));
+		//// Change position to center
+		//Vector2 centeredPosition = new Vector2();
+		//centeredPosition.x = (float)(Math.Round(Position.x / 32) * 32);
+		//centeredPosition.y = (float)(Math.Round(Position.y / 32) * 32);
+		//// Check if there already is a Bomb on center position
+		//List<Bomb> bombs = GetTree().Root.GetChildren().OfType<Bomb>().ToList();
+		//foreach (Bomb bomb in bombs)
+		//{
+			//if (bomb.Position == centeredPosition)
+			//{
+				//return false;
+			//}
+		//}
+		//newBomb.Position = centeredPosition;
+		//GetTree().Root.AddChild(newBomb);
+		//newBomb.Connect("Detonated", this, "_on_Bomb_Detonated");
+		amountOfBombs--;
+		return true;
+>>>>>>> 69ab0201b97b9a8724c149db139d146990fcb3e8
 	}
 	
 	private void _on_Bomb_Detonated(Vector2 position){
@@ -112,6 +165,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 	{
 		EmitSignal(SignalName.PlayerWasRemoved);
 	}
+<<<<<<< HEAD
 		protected bool _TryPlaceBomb(Vector2 bombposition)
 	{
 		if (amountOfBombs <= 0) { return false; };
@@ -136,6 +190,27 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 		amountOfBombs--;
 		return true;
+=======
+	private void pick_up_power_up(string typeOfPowerUp)
+	{
+		if (typeOfPowerUp == "Powerup_bomb")
+		{
+			IncreaseBombNum();
+		}
+		else if (typeOfPowerUp == "Powerup_flame")
+		{
+			IncreaseFlameArea();
+		}
+	}
+	private void IncreaseBombNum()
+	{
+	   
+	}
+
+	private void IncreaseFlameArea()
+	{
+		
+>>>>>>> 69ab0201b97b9a8724c149db139d146990fcb3e8
 	}
 	
 	
@@ -167,4 +242,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 69ab0201b97b9a8724c149db139d146990fcb3e8

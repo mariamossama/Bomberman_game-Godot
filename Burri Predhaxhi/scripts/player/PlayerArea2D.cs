@@ -24,7 +24,6 @@ public partial class PlayerArea2D : Area2D
 					string typeOfPowerUp = ((PowerUp)area).typeOfPowerUp;
 					EmitSignal(nameof(PickedUpPowerUp), typeOfPowerUp);
 				}
-				
 			}
 		}
 	}
