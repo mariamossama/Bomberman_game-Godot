@@ -10,6 +10,7 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	//a tile scaled down in the level) whereas t can be chosen arbitrarily
 	//currently some objects "knock" the user out of its unit of movement
 	//TODO: address that (all objects must either be ignored or snapped to center and with size 50px)
+	//or maybe we should see if there is any constraint that snaps the monster to the grid
 	private Vector2 velocity;
 	private AnimatedSprite2D animationSprite;
 	public bool dead = false;
@@ -32,8 +33,8 @@ public partial class Monster : CharacterBody2D, IDestroyable
 
 	public override void _Ready()
 	{
-		animationSprite = GetNode<Area2D>("Area2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
+		animationSprite = GetNode<Area2D>("MonsterArea").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		direction = Vector2.Zero;
 		up = GetNode<RayCast2D>("RayCastUp");
 		down = GetNode<RayCast2D>("RayCastDown");
 		left = GetNode<RayCast2D>("RayCastLeft");
@@ -57,7 +58,8 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	{
 		Random rnd = new Random();
 		var viableDirections = getDirections();
-		direction = viableDirections[rnd.Next(viableDirections.Length)];
+		if (viableDirections.Length > 0)
+			direction = viableDirections[rnd.Next(viableDirections.Length)];
 		
 	}
 	
@@ -69,6 +71,7 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	private void ChangeAnimation(Vector2 direction)
 	{
 		if (dead){
+			this.direction = Vector2.Zero;
 			animationSprite.Play("die");
 		} else if (direction.X > 0)
 		{	

@@ -110,7 +110,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"die",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -201,26 +201,28 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4dyw5"]
-radius = 54.0
-height = 152.0
+radius = 40.0
+height = 133.333
 
 [node name="Monster" type="CharacterBody2D"]
 scale = Vector2(0.285, 0.285)
 script = ExtResource("1_tqo5u")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="MonsterArea" type="Area2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MonsterArea"]
 texture_filter = 1
 position = Vector2(-7.01754, 3.50877)
 scale = Vector2(3.865, 3.892)
 sprite_frames = SubResource("SpriteFrames_4eby8")
 animation = &"walk_side"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MonsterArea"]
+scale = Vector2(1.14035, 1)
 shape = SubResource("CapsuleShape2D_4dyw5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.14035, 1)
 shape = SubResource("CapsuleShape2D_4dyw5")
 
 [node name="RayCastDown" type="RayCast2D" parent="."]
@@ -250,5 +252,5 @@ collide_with_areas = true
 [node name="DirectionChangeTimer" type="Timer" parent="."]
 autostart = true
 
-[connection signal="animation_finished" from="Area2D/AnimatedSprite2D" to="." method="OnAnimationFinished"]
+[connection signal="animation_finished" from="MonsterArea/AnimatedSprite2D" to="." method="OnAnimationFinished"]
 [connection signal="timeout" from="DirectionChangeTimer" to="." method="OnDirectionChangeTimeout"]

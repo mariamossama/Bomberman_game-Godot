@@ -12,6 +12,8 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 	 [Signal]
 	 public delegate void PlayerWasRemovedEventHandler();
+
+	 Vector2 direction;
 	
 	public void Destroy() {
 		GD.Print("Ocmuqinena");
@@ -20,24 +22,27 @@ public partial class Player : CharacterBody2D, IDestroyable
 	
 	public override void _Ready()
 	{
-		//this.speed = 100;
 		this.velocity = new Vector2();
+		this.direction = Vector2.Zero;
 		this.animationSprite = GetNode<Area2D>("Area2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 	
 	public override void _PhysicsProcess(double _delta) {
-		Vector2 direction = new Vector2(
-			Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left"),
-			Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
-		);
-		
-		if (direction.Length() > 1) {
-			direction = direction.Normalized();
+		if (!dead){
+			direction = new Vector2(
+				Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left"),
+				Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
+			);
+			
+			if (direction.Length() > 1) {
+				direction = direction.Normalized();
+			}
 		}
-
 		Velocity = direction * Speed;
 		changeAnimation(direction);
 		MoveAndSlide();
+
+		DieAfterCollidingWMonster();
 	}
 	
 	private void changeAnimation(Vector2 direction) {
@@ -75,7 +80,17 @@ public partial class Player : CharacterBody2D, IDestroyable
 	{
 		EmitSignal(SignalName.PlayerWasRemoved);
 	}
-	
+
+	private void DieAfterCollidingWMonster(){
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			KinematicCollision2D collision = GetSlideCollision(i);
+			if (collision.GetCollider() is Monster)
+				dead = true;
+		}
+	}
+
+
 }
 
 

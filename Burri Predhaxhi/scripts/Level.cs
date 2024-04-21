@@ -64,7 +64,6 @@ public partial class Level : Node2D
 		Vector2I randomAvailCoordinate = availableTiles[Convert.ToInt32(GD.Randi() % availableTiles.Count)]; 
 		
 		var monsterInstance = (Monster) monsterScene.Instantiate();
-		//monsterInstance.tileMap = tileMap; //FIXME: not needed anymore probably
 		monsterInstance.Position = ToLocal(utils.convertedCoords(randomAvailCoordinate));
 
 		AddChild(monsterInstance);
