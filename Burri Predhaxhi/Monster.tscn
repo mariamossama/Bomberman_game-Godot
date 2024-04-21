@@ -212,16 +212,43 @@ script = ExtResource("1_tqo5u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 texture_filter = 1
+position = Vector2(-7.01754, 3.50877)
 scale = Vector2(3.865, 3.892)
 sprite_frames = SubResource("SpriteFrames_4eby8")
 animation = &"walk_side"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(6, -4)
 shape = SubResource("CapsuleShape2D_4dyw5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, -4)
 shape = SubResource("CapsuleShape2D_4dyw5")
 
+[node name="RayCastDown" type="RayCast2D" parent="."]
+position = Vector2(-1.77636e-15, 10.5263)
+scale = Vector2(2.51, 2.51)
+target_position = Vector2(5.96046e-08, 48.1928)
+collide_with_areas = true
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(7.01755, 3.50877)
+scale = Vector2(2.51, 2.51)
+target_position = Vector2(52.5301, -0.481928)
+collide_with_areas = true
+
+[node name="RayCastUp" type="RayCast2D" parent="."]
+position = Vector2(-4.23516e-22, -7.01755)
+scale = Vector2(2.51, 2.51)
+target_position = Vector2(1.41542e-15, -55.9167)
+collide_with_areas = true
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-3.50878, 5.04871e-29)
+scale = Vector2(2.51, 2.51)
+target_position = Vector2(-51.7229, -1.68732e-22)
+collide_with_areas = true
+
+[node name="DirectionChangeTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="animation_finished" from="Area2D/AnimatedSprite2D" to="." method="OnAnimationFinished"]
+[connection signal="timeout" from="DirectionChangeTimer" to="." method="OnDirectionChangeTimeout"]

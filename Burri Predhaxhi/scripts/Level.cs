@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Linq;
+// using System.Numerics;
 
 public partial class Level : Node2D
 {
@@ -11,6 +12,7 @@ public partial class Level : Node2D
 	private int numOfPlayers;
 
 	TileMap tileMap;
+	public Utils utils;
 	Vector2I initialPlayerPos; //FIXME: should be an array of initial positions (3 positions)
 
 	public override void _Ready()
@@ -22,6 +24,7 @@ public partial class Level : Node2D
 		playerScene = GD.Load<PackedScene>("res://Player.tscn");
 		monsterScene = GD.Load<PackedScene>("res://Monster.tscn");
 		tileMap = GetNode<Node2D>("LevelFloor").GetNode<TileMap>("TileMap");
+		utils = new Utils(tileMap);
 		SpawnPlayers();
 		SpawnMonsters();
 	}
@@ -39,19 +42,13 @@ public partial class Level : Node2D
 
 	}
 
-	public Vector2 convertedCoords(int x,int y){ //overloaded for ease of use 
-		return tileMap.ToGlobal(tileMap.MapToLocal(new Vector2I(x, y))); //in case you like using coordinates as ints more
-	}
-
-	public Vector2 convertedCoords(Vector2I pos){
-		return tileMap.ToGlobal(tileMap.MapToLocal(pos));
-	}
+	
 
 	private void SpawnPlayers(){ //FIXME: currently just 1 player
 		var playerInstance = (Player) playerScene.Instantiate();
-		GD.Print(ToLocal(convertedCoords(initialPlayerPos)));
+		GD.Print(ToLocal(utils.convertedCoords(initialPlayerPos)));
 		playerInstance.PlayerWasRemoved += OnPlayerWasRemoved;
-		playerInstance.Position = ToLocal(convertedCoords(initialPlayerPos)); //????
+		playerInstance.Position = ToLocal(utils.convertedCoords(initialPlayerPos)); //????
 		AddChild(playerInstance);
 	}
 	
@@ -63,14 +60,15 @@ public partial class Level : Node2D
 		int YBound = -2;
 		var availableTiles = tileMap.GetUsedCellsById(0, -1, new Vector2I(0,4))
 				.Where(vec => vec.X > XBound && vec.Y > YBound).ToList<Vector2I>();
-
-		Vector2I randomAvailCoordinate = availableTiles[(int) GD.Randi() % (availableTiles.Count-1)];
+	
+		Vector2I randomAvailCoordinate = availableTiles[Convert.ToInt32(GD.Randi() % availableTiles.Count)]; 
 		
 		var monsterInstance = (Monster) monsterScene.Instantiate();
-
-		monsterInstance.Position = ToLocal(convertedCoords(randomAvailCoordinate));
+		//monsterInstance.tileMap = tileMap; //FIXME: not needed anymore probably
+		monsterInstance.Position = ToLocal(utils.convertedCoords(randomAvailCoordinate));
 
 		AddChild(monsterInstance);
+
 	}
 	
 	private void OnPlayerWasRemoved()

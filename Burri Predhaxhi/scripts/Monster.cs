@@ -1,45 +1,53 @@
 using Godot;
 using System;
+using System.IO;
+using System.Linq;
 
 public partial class Monster : CharacterBody2D, IDestroyable
 {
 	[Export]
-	public int Speed { get; set; } = 100;
+	public float Speed { get; set; } = 5/3f; //NOTE: the monster moves in units, d/t where d is 50px (the size of
+	//a tile scaled down in the level) whereas t can be chosen arbitrarily
+	//currently some objects "knock" the user out of its unit of movement
+	//TODO: address that (all objects must either be ignored or snapped to center and with size 50px)
 	private Vector2 velocity;
 	private AnimatedSprite2D animationSprite;
-	private Random random; //use GD.Randi() instead 
-	private double timeSinceLastDirectionChange = 0f;
-	private double directionChangeInterval = 1f; 
 	public bool dead = false;
 
+	RayCast2D up;
+	RayCast2D down;
+	RayCast2D left;
+	RayCast2D right;
+	Vector2 direction;
 	public void Destroy() 
 	{
 		GD.Print("Monster destroyed");
 		dead = true;
 	}
 
+	private Vector2[] getDirections(){
+		return (new (Vector2, RayCast2D)[] {(Vector2.Up, up), (Vector2.Down, down), (Vector2.Left, left), (Vector2.Right, right)})
+				.Where(x => !x.Item2.IsColliding()).Select(x=>x.Item1).ToArray();
+	}
+
 	public override void _Ready()
 	{
 		animationSprite = GetNode<Area2D>("Area2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+		up = GetNode<RayCast2D>("RayCastUp");
+		down = GetNode<RayCast2D>("RayCastDown");
+		left = GetNode<RayCast2D>("RayCastLeft");
+		right = GetNode<RayCast2D>("RayCastRight");
+
 		ChangeDirection(); // Begin with a random direction
+
+		
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (dead) 
-		{
-			return; //??? 
-		}
 
-		//move in units
-
-		timeSinceLastDirectionChange += delta;
-
-		if (timeSinceLastDirectionChange >= directionChangeInterval)
-		{
-			timeSinceLastDirectionChange = 0f;
-			ChangeDirection();
-		}
+		velocity = direction * Speed;
 
 		MoveAndCollide(velocity);
 		ChangeAnimation(velocity);
@@ -47,28 +55,22 @@ public partial class Monster : CharacterBody2D, IDestroyable
 
 	private void ChangeDirection()
 	{
-		int randomDirection = random.Next(0, 4);
-		switch (randomDirection)
-		{
-			case 0: velocity = new Vector2(1, 0); break; // Right
-			case 1: velocity = new Vector2(-1, 0); break; // Left
-			case 2: velocity = new Vector2(0, 1); break; // Down
-			case 3: velocity = new Vector2(0, -1); break; // Up
-		} // old + there are enums for directions
-
-		Vector2[] directions = {Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right};
-
-		//if coordinates both even: pick randomly from 4 directions
-		// if x even, y odd, 2 directions: left, right
-		// if x odd, y even, 2 direction: up, down
-
+		Random rnd = new Random();
+		var viableDirections = getDirections();
+		direction = viableDirections[rnd.Next(viableDirections.Length)];
+		
 	}
-
-
+	
+	private void OnDirectionChangeTimeout()
+	{
+		ChangeDirection();
+	}
 
 	private void ChangeAnimation(Vector2 direction)
 	{
-		if (direction.X > 0)
+		if (dead){
+			animationSprite.Play("die");
+		} else if (direction.X > 0)
 		{	
 			animationSprite.FlipH = true;
 			animationSprite.Play("walk_side");
@@ -96,3 +98,6 @@ public partial class Monster : CharacterBody2D, IDestroyable
 		}
 	}
 }
+
+
+

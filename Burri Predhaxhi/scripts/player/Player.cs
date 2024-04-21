@@ -63,8 +63,6 @@ public partial class Player : CharacterBody2D, IDestroyable
 	private void OnAnimationFinished(){
 		if (dead){
 			QueueFree();
-			//TODO: write a restart method, logic will change when there are more players
-			
 		}
 	}
 	
