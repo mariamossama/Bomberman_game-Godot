@@ -1,5 +1,9 @@
 using Godot;
 using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D, IDestroyable
 {
@@ -9,9 +13,18 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 	private Vector2 velocity;
 	private AnimatedSprite2D animationSprite;
-
+	
 	 [Signal]
 	 public delegate void PlayerWasRemovedEventHandler();
+	
+	//powerup
+	public int amountOfBombs = 1;
+	public int bombPowerUp = 0;
+	public int flamePowerUp = 0;
+	
+	//private const string _BombResource = "res://Bomb.tscn";
+	PackedScene bombScene;
+	
 	
 	public void Destroy() {
 		GD.Print("Ocmuqinena");
@@ -23,6 +36,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 		//this.speed = 100;
 		this.velocity = new Vector2();
 		this.animationSprite = GetNode<Area2D>("PlayerArea2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		bombScene = GD.Load<PackedScene>("res://Bomb.tscn");
 	}
 	
 	public override void _PhysicsProcess(double _delta) {
@@ -38,8 +52,12 @@ public partial class Player : CharacterBody2D, IDestroyable
 		Velocity = direction * Speed;
 		changeAnimation(direction);
 		MoveAndSlide();
+		
 	}
 	
+	private void _on_Bomb_Detonated(Vector2 position){
+		amountOfBombs++;
+	}
 	private void changeAnimation(Vector2 direction) {
 		if (dead) {
 			animationSprite.Play("die");
@@ -67,18 +85,86 @@ public partial class Player : CharacterBody2D, IDestroyable
 			
 		}
 	}
-	
+	private bool canPlaceBomb = true;
+	private double bombPlacementCooldown = 0.5f; 
+	private double timeSinceLastBomb = 0;
+
 	public override void _Process(double delta)
 	{
+		if (canPlaceBomb && Input.IsActionJustPressed("place_bomb"))
+		{
+			GD.Print("space pressed for bomb placement");
+			if (_TryPlaceBomb(Position)) {
+				canPlaceBomb = false;
+				timeSinceLastBomb = 0; 
+			}
+		}
 
+		if (!canPlaceBomb) {
+			timeSinceLastBomb += delta;
+			if (timeSinceLastBomb >= bombPlacementCooldown) {
+				canPlaceBomb = true;  
+			}
+		}
 	}
-	
+		
 	private void OnTreeExited()
 	{
 		EmitSignal(SignalName.PlayerWasRemoved);
 	}
+		protected bool _TryPlaceBomb(Vector2 bombposition)
+	{
+		if (amountOfBombs <= 0) { return false; };
+		//if (isJustLoaded) { return false; };
+		var bombInstance = (Node2D) bombScene.Instantiate();
+
+		// Create a vector and assign x and y manually.
+		Vector2 centeredPosition = new Vector2();
+		centeredPosition.X = (float)(Math.Round(Position.X / 32) * 32);
+		centeredPosition.Y = (float)(Math.Round(Position.Y / 32) * 32);
+		List<Bomb> bombs = GetTree().Root.GetChildren().OfType<Bomb>().ToList();
+		foreach (Bomb bomb in bombs)
+		{
+			if (bomb.Position == centeredPosition)
+			{
+				return false; //already a bomb
+			}
+		}
+		bombInstance.Position =  centeredPosition ;
+		GetTree().Root.AddChild(bombInstance);
+		((Bomb)bombInstance).Detonated += _on_Bomb_Detonated;
+
+		amountOfBombs--;
+		return true;
+	}
 	
+	
+
+	private void pick_up_power_up(string typeOfPowerUp)
+	{
+			if (typeOfPowerUp == "Powerup_bomb")
+			{
+				IncreaseBombNum();
+			}
+			else if (typeOfPowerUp == "Powerup_flame")
+			{
+				IncreaseFlameArea();
+			}
+	}
+	private void IncreaseBombNum()
+	{
+	   amountOfBombs ++ ;
+	
+	}
+
+	private void IncreaseFlameArea()
+	{
+		 flamePowerUp ++;
+	}
 }
+
+
+
 
 
 

@@ -3,6 +3,8 @@ using System;
 
 public partial class Bomb : RigidBody2D
 {
+	[Signal] public delegate void DetonatedEventHandler(Vector2 position);
+	
 	// Called when the node enters the scene tree for the first time.
 	private AnimatedSprite2D animatedSprite2D;
 	CharacterBody2D player;
@@ -24,6 +26,7 @@ public partial class Bomb : RigidBody2D
 	{
 		//QueueFree();
 		animatedSprite2D.Hide();
+		
 	}
 
 	private void OnExplosionStartTimerTimeout()
@@ -36,6 +39,7 @@ public partial class Bomb : RigidBody2D
 	{
 		var explosion = GetNode<Explosion>("Explosion");
 		explosion.ToggleFlames();
+		EmitSignal(nameof(Detonated), Position);
 		QueueFree();
 	}
 
@@ -46,6 +50,7 @@ public partial class Bomb : RigidBody2D
 			RemoveCollisionExceptionWith(player);
 		}
 	}
+	
 }
 
 
