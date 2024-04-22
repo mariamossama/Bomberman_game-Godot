@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://de1g0xx7qsbtt"]
+
+[ext_resource type="Texture2D" uid="uid://c12v3rjiih20c" path="res://bombman/staticbox.png" id="1_0kawp"]
+[ext_resource type="Texture2D" uid="uid://cbldy5mxgcf16" path="res://kenney-particle-pack-7e801dc538996622a91327bb1dd5879cf977aa09/addons/kenney_particle_pack/fire_01.png" id="1_0xr8f"]
+[ext_resource type="Script" path="res://Box.cs" id="1_id4ou"]
+[ext_resource type="Texture2D" uid="uid://dql6dtnnybm41" path="res://kenney-particle-pack-7e801dc538996622a91327bb1dd5879cf977aa09/addons/kenney_particle_pack/fire_02.png" id="2_qq80d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwycw"]
+size = Vector2(46, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgln2"]
+size = Vector2(52, 50.25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kmanv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0xr8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qq80d")
+}],
+"loop": true,
+"name": &"blown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0kawp")
+}],
+"loop": true,
+"name": &"staticBox",
+"speed": 5.0
+}]
+
+[node name="Box" type="RigidBody2D"]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(135, 71)
+gravity_scale = 0.0
+script = ExtResource("1_id4ou")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(117, 70)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-100, -53)
+shape = SubResource("RectangleShape2D_nwycw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(17, 17)
+shape = SubResource("RectangleShape2D_lgln2")
+
+[node name="BoxAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(17, 17)
+scale = Vector2(0.08, 0.08)
+sprite_frames = SubResource("SpriteFrames_kmanv")
+animation = &"staticBox"
+flip_h = true
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://u6e11gt8xvgn"]
+[gd_scene load_steps=3 format=3 uid="uid://u6e11gt8xvgn"]
 
 [ext_resource type="Script" path="res://scripts/menu/Menu.cs" id="1_xmddx"]
+[ext_resource type="FontFile" uid="uid://c0pbtrtjakd3t" path="res://Fonts/bm.ttf" id="2_qjrd6"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -11,22 +12,62 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xmddx")
 
-[node name="GameName" type="Label" parent="."]
-layout_mode = 0
-offset_left = 431.0
-offset_top = 151.0
-offset_right = 528.0
-offset_bottom = 174.0
-scale = Vector2(3.04, 2.88)
-text = "Bomberman"
-
 [node name="Start" type="Button" parent="."]
-layout_mode = 0
-offset_left = 462.0
-offset_top = 341.0
-offset_right = 508.0
-offset_bottom = 372.0
-scale = Vector2(4.97034, 4.38733)
+visibility_layer = 5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = 126.0
+offset_right = 176.0
+offset_bottom = 262.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_qjrd6")
+theme_override_font_sizes/font_size = 95
 text = "Start"
+
+[node name="Exit" type="Button" parent="."]
+visibility_layer = 4
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -121.0
+offset_bottom = 104.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_qjrd6")
+theme_override_font_sizes/font_size = 45
+text = "Exit"
+alignment = 2
+icon_alignment = 2
+vertical_icon_alignment = 0
+
+[node name="Label" type="Label" parent="."]
+visibility_layer = 4
+layout_mode = 0
+offset_left = 248.0
+offset_top = 304.0
+offset_right = 1331.0
+offset_bottom = 568.0
+theme_override_fonts/font = ExtResource("2_qjrd6")
+theme_override_font_sizes/font_size = 150
+text = "Bomberman"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Setting" type="Button" parent="."]
+layout_mode = 0
+offset_left = 616.0
+offset_top = 736.0
+offset_right = 976.0
+offset_bottom = 808.0
+theme_override_fonts/font = ExtResource("2_qjrd6")
+theme_override_font_sizes/font_size = 60
+text = "Setting
+"
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

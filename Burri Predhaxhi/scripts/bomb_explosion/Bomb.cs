@@ -3,7 +3,9 @@ using System;
 
 public partial class Bomb : RigidBody2D
 {
-	// Called when the node enters the scene tree for the first time.
+	[Signal] 
+	public delegate void HasDetonatedEventHandler(); 
+	
 	private AnimatedSprite2D animatedSprite2D;
 	CharacterBody2D player;
 	public override void _Ready()
@@ -24,11 +26,13 @@ public partial class Bomb : RigidBody2D
 	{
 		//QueueFree();
 		animatedSprite2D.Hide();
+		
 	}
 
 	private void OnExplosionStartTimerTimeout()
 	{
 		var explosion = GetNode<Explosion>("Explosion");
+		EmitSignal(SignalName.HasDetonated);
 		explosion.ToggleFlames();
 	}
 	
@@ -46,6 +50,7 @@ public partial class Bomb : RigidBody2D
 			RemoveCollisionExceptionWith(player);
 		}
 	}
+	
 }
 
 

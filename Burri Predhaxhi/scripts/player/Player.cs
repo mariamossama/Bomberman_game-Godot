@@ -24,7 +24,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 	{
 		this.velocity = new Vector2();
 		this.direction = Vector2.Zero;
-		this.animationSprite = GetNode<Area2D>("Area2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		this.animationSprite = GetNode<Area2D>("PlayerArea2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 	
 	public override void _PhysicsProcess(double _delta) {
@@ -92,6 +92,3 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 
 }
-
-
-

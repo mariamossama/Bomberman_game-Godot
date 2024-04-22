@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Linq;
-// using System.Numerics;
 
 public partial class Level : Node2D
 {
@@ -10,6 +9,8 @@ public partial class Level : Node2D
 
 	PackedScene monsterScene;
 	private int numOfPlayers;
+	private int maxBombCount = 1; //initially one, when you get the bomb number increasing powerup, make sure to increment it
+	private bool canPlaceBomb = true;
 
 	TileMap tileMap;
 	public Utils utils;
@@ -31,13 +32,19 @@ public partial class Level : Node2D
 
 	public override void _Process(double delta)
 	{
-
-		if (Input.IsActionJustPressed("place_bomb")){
-			var bombInstance = (Node2D) bombScene.Instantiate();
+		int bombCount = 0;
+		if (Input.IsActionJustPressed("place_bomb_p1") && canPlaceBomb){
+			var bombInstance = (Bomb) bombScene.Instantiate();
 			var playerPos = GetNode<CharacterBody2D>("Player").Position;
 			
 			bombInstance.Position = playerPos;
+			bombInstance.HasDetonated += OnBombHasDetonated;
 			AddChild(bombInstance);
+			bombCount++;
+
+			if (bombCount == maxBombCount){
+				canPlaceBomb = false;
+			}
 		}
 
 	}
@@ -78,10 +85,13 @@ public partial class Level : Node2D
 			SpawnMonsters();
 		}
 	}
+
+	private void OnBombHasDetonated(){
+		canPlaceBomb = true;
+	}
+
+	
 	
 }
-
-
-
 
 

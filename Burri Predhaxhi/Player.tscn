@@ -154,14 +154,14 @@ height = 15.2132
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_4iakv")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="PlayerArea2D" type="Area2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerArea2D"]
 scale = Vector2(1.06083, 0.973313)
 sprite_frames = SubResource("SpriteFrames_o6uvw")
 animation = &"idle_down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
 position = Vector2(3.56646e-06, -0.999979)
 rotation = -3.14159
 scale = Vector2(4.5036, -5.15102)
@@ -174,4 +174,4 @@ scale = Vector2(4.5036, -5.15102)
 shape = SubResource("CapsuleShape2D_ph6u7")
 
 [connection signal="tree_exited" from="." to="." method="OnTreeExited"]
-[connection signal="animation_finished" from="Area2D/AnimatedSprite2D" to="." method="OnAnimationFinished"]
+[connection signal="animation_finished" from="PlayerArea2D/AnimatedSprite2D" to="." method="OnAnimationFinished"]
