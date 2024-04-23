@@ -66,3 +66,4 @@ place_bomb_p3={
 [rendering]
 
 rendering_device/driver=""
+renderer/rendering_method="gl_compatibility"
