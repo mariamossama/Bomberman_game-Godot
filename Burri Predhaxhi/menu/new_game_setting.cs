@@ -18,7 +18,35 @@ public partial class new_game_setting : Control
 		GetTree().Root.AddChild(newgame);
 		Hide();
 	}
+	private void map_1_pressed()
+	{
+		var frame = GD.Load<PackedScene>("res://Gaming.tscn").Instantiate();
+		GetTree().Root.AddChild(frame);
+		var newgame = GD.Load<PackedScene>("res://Asset/Map/Map2.tscn").Instantiate();
+		GetTree().Root.AddChild(newgame);
+		Hide();// Replace with function body.
+	}
+	
+	private void map_2_pressed()
+	{
+		var frame = GD.Load<PackedScene>("res://Gaming.tscn").Instantiate();
+		GetTree().Root.AddChild(frame);
+		var newgame = GD.Load<PackedScene>("res://Asset/Map/Map3.tscn").Instantiate();
+		GetTree().Root.AddChild(newgame);
+		Hide();// Replace with function body.
+	}
+	
+	private void map_3_pressed()
+	{
+		var frame = GD.Load<PackedScene>("res://Gaming.tscn").Instantiate();
+		GetTree().Root.AddChild(frame);
+		var newgame = GD.Load<PackedScene>("res://Asset/Map/Map1.tscn").Instantiate();
+		GetTree().Root.AddChild(newgame);
+		Hide();// Replace with function body.
+	}
 }
+
+
 
 
 

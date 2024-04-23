@@ -1,11 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwt237s0mbjsp"]
+[gd_scene load_steps=2 format=3 uid="uid://bwt237s0mbjsp"]
 
 [ext_resource type="PackedScene" uid="uid://dmjdml2uqg7l0" path="res://menu/GamingInfo.tscn" id="1_bhmky"]
-[ext_resource type="PackedScene" uid="uid://4hcetcm4fv1n" path="res://TestLevel.tscn" id="2_gc2i4"]
 
 [node name="Gaming" type="Node"]
 
 [node name="GamingInfo" parent="." instance=ExtResource("1_bhmky")]
-
-[node name="TestLevel" parent="." instance=ExtResource("2_gc2i4")]
-position = Vector2(200, 128)

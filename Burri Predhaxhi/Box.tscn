@@ -37,6 +37,7 @@ animations = [{
 light_mask = 4
 visibility_layer = 4
 position = Vector2(135, 71)
+scale = Vector2(1.2, 1.2)
 gravity_scale = 0.0
 script = ExtResource("1_id4ou")
 
@@ -45,15 +46,17 @@ position = Vector2(117, 70)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-100, -53)
+scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_nwycw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(17, 17)
+scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_lgln2")
 
 [node name="BoxAnimation" type="AnimatedSprite2D" parent="."]
-position = Vector2(17, 17)
-scale = Vector2(0.08, 0.08)
+position = Vector2(18, 18)
+scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_kmanv")
 animation = &"staticBox"
 flip_h = true

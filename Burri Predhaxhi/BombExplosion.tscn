@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://scripts/bomb_explosion/Explosion.cs" id="1_csbxl"]
 [ext_resource type="PackedScene" uid="uid://dmuvevjbndrta" path="res://Explosion.tscn" id="2_1fyil"]
 
-
 [node name="BombExplosion" type="Node2D"]
 top_level = true
 position = Vector2(0, 1)
