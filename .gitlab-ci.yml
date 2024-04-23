@@ -1,4 +1,4 @@
-image: blank-godot-image
+image: barichello/godot-ci:4.2.2
 
 variables:
   EXPORT_NAME: blank
