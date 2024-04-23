@@ -11,7 +11,7 @@ windows:
   stage: export
   script:
     - mkdir -v -p build/windows
-    - godot -v --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
+    - xvfb-run -s "-screen 0 1024x768x24" godot -v --rendering-driver opengl3 --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
   artifacts:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:
