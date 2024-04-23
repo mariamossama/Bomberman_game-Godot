@@ -1,11 +1,23 @@
 image: mariamossama/blank-godot-image:latest
 
+cache:
+  key: import-assets
+  paths:
+    - .godot/imported/
+
+
 variables:
   EXPORT_NAME: blank
 
 stages:
+  - import-assets
   - export
   - deploy
+
+import-assets:
+  stage: import-assets
+  script:
+    - godot --headless --verbose --editor --quit
 
 windows:
   stage: export
@@ -27,6 +39,3 @@ linux:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:
       - build/linux
-
-
-
