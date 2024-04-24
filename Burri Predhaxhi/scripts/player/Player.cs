@@ -14,6 +14,11 @@ public partial class Player : CharacterBody2D, IDestroyable
 	 public delegate void PlayerWasRemovedEventHandler();
 
 	 Vector2 direction;
+
+	public int maxBombCount = 1; //initially one, when you get the bomb number increasing powerup, make sure to increment it
+	public bool canPlaceBomb = true;
+
+	public Vector2I initialPlayerPos;
 	
 	public void Destroy() {
 		GD.Print("Ocmuqinena");
@@ -32,7 +37,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 			direction = new Vector2(
 				Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left"),
 				Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
-			);
+			); //when generalizing to multiple players, these keys must be supplied in level
 			
 			if (direction.Length() > 1) {
 				direction = direction.Normalized();

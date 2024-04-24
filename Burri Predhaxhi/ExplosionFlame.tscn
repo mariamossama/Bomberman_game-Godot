@@ -40,4 +40,5 @@ disabled = true
 [node name="Flame" parent="." instance=ExtResource("2_aui60")]
 process_material = SubResource("ParticleProcessMaterial_jjdtk")
 
+[connection signal="area_entered" from="Area2D" to="." method="OnArea2DEntered"]
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

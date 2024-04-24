@@ -5,7 +5,7 @@ public partial class Box : RigidBody2D, IDestroyable
 {
 
 	//PowerUp inside ;
-	private const string _PowerUpResource = "res://Asset/PowerUp.tscn";
+	private const string _PowerUpResource = "res://Asset/BombIncreasePowerUp.tscn";
 	private PackedScene _ScenePowerUp;
 	
 	private AnimatedSprite2D animatedSprite2D;

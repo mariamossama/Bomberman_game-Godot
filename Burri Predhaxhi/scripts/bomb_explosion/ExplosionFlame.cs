@@ -35,14 +35,26 @@ public partial class ExplosionFlame : Node2D
 	
 	private void OnBodyEntered(Node body)
 	{	
+		
+		destroyObject(body);
+		
+	}
+
+
+	private void OnArea2DEntered(Area2D area)
+	{
+		destroyObject(area);
+	}
+		
+
+	private void destroyObject(Node body){
 		if (body is IDestroyable){
 			var destroyable = (IDestroyable) body;
 			destroyable.Destroy();
 		}
-		
-		
 	}
-	
 
 }
+
+
 

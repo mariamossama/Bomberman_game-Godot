@@ -6,19 +6,21 @@ public partial class Level : Node2D
 {
 	PackedScene bombScene;
 	PackedScene playerScene;
+	PackedScene powerUpScene;
 
 	PackedScene monsterScene;
 	private int numOfPlayers;
-	private int maxBombCount = 1; //initially one, when you get the bomb number increasing powerup, make sure to increment it
-	private bool canPlaceBomb = true;
+
 
 	TileMap tileMap;
 	public Utils utils;
-	Vector2I initialPlayerPos; //FIXME: should be an array of initial positions (3 positions)
+
+	Player playerInstance; //change to list when generalizing to more than 1 player
+
+	private int bombCount = 0;
 
 	public override void _Ready()
 	{
-		initialPlayerPos = new Vector2I(-5,-5);
 		//TODO: the number of players shouldn't be hardcoded but be determined by the menu
 		numOfPlayers = 1;
 		bombScene = GD.Load<PackedScene>( "res://Bomb.tscn");
@@ -28,12 +30,17 @@ public partial class Level : Node2D
 		utils = new Utils(tileMap);
 		SpawnPlayers();
 		SpawnMonsters();
+		InsertPowerUps();
 	}
 
 	public override void _Process(double delta)
 	{
-		int bombCount = 0;
-		if (Input.IsActionJustPressed("place_bomb_p1") && canPlaceBomb){
+		PlaceBomb();
+	}
+
+	private void PlaceBomb(){
+
+		if (Input.IsActionJustPressed("place_bomb_p1") && playerInstance.canPlaceBomb){
 			var bombInstance = (Bomb) bombScene.Instantiate();
 			var playerPos = GetNode<CharacterBody2D>("Player").Position;
 			
@@ -41,21 +48,21 @@ public partial class Level : Node2D
 			bombInstance.HasDetonated += OnBombHasDetonated;
 			AddChild(bombInstance);
 			bombCount++;
+			GD.Print("current bomb count vs max: " + bombCount + " , " + playerInstance.maxBombCount);
 
-			if (bombCount == maxBombCount){
-				canPlaceBomb = false;
+			if (bombCount == playerInstance.maxBombCount){
+				playerInstance.canPlaceBomb = false;
+				bombCount = 0;
 			}
 		}
-
 	}
 
-	
-
 	private void SpawnPlayers(){ //FIXME: currently just 1 player
-		var playerInstance = (Player) playerScene.Instantiate();
-		GD.Print(ToLocal(utils.convertedCoords(initialPlayerPos)));
+		playerInstance = (Player) playerScene.Instantiate();
+		playerInstance.initialPlayerPos = new Vector2I(-5,-5); //FIXME: to be turned to a list likely
+		GD.Print(ToLocal(utils.convertedCoords(playerInstance.initialPlayerPos)));
 		playerInstance.PlayerWasRemoved += OnPlayerWasRemoved;
-		playerInstance.Position = ToLocal(utils.convertedCoords(initialPlayerPos)); //????
+		playerInstance.Position = ToLocal(utils.convertedCoords(playerInstance.initialPlayerPos)); //????
 		AddChild(playerInstance);
 	}
 	
@@ -77,17 +84,25 @@ public partial class Level : Node2D
 
 	}
 	
-	private void OnPlayerWasRemoved()
+	private void OnPlayerWasRemoved() //FIXME: misleading name, add a restart method and queuefree monsters as well
 	{
 		numOfPlayers--;
 		if (numOfPlayers == 0){
 			SpawnPlayers();
-			SpawnMonsters();
+			SpawnMonsters(); 
 		}
 	}
 
 	private void OnBombHasDetonated(){
-		canPlaceBomb = true;
+		playerInstance.canPlaceBomb = true;
+	}
+
+
+	private void InsertPowerUps(){
+		powerUpScene = GD.Load<PackedScene>( "res://Asset/BombIncreasePowerUp.tscn");
+		BombIncreasePowerUp bombIncPowerUp = (BombIncreasePowerUp) powerUpScene.Instantiate();
+		bombIncPowerUp.Position = new Vector2(426, 77); //temp
+		AddChild(bombIncPowerUp);
 	}
 
 	
