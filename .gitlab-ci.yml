@@ -8,8 +8,8 @@ cache:
 
 variables:
   EXPORT_NAME: blank
-  ITCHIO_USERNAME: blank_bomberman
-  ITCHIO_GAME: blank_dyna-blasterGame
+  ITCHIO_USERNAME: blank-bomberman
+  ITCHIO_GAME: blank-dyna-blastergame
 
 stages:
   - import-assets
@@ -46,7 +46,7 @@ linux:
 itchio:linux:
   stage: deploy
   script:
-    - export BUTLER_API_KEY=j3gQzibX4SDd5P2eqd4iNYcwAEkTNK5Zi61GNJkN
+    - export BUTLER_API_KEY=sPV15ap7WDYnVIPh4rEWrzu9UFcBKNpikF0w7uTW
     - butler push ./build/linux $ITCHIO_USERNAME/$ITCHIO_GAME:linux
   dependencies:
     - linux
@@ -55,7 +55,7 @@ itchio:linux:
 itchio:windows:
   stage: deploy
   script:
-    - export BUTLER_API_KEY=j3gQzibX4SDd5P2eqd4iNYcwAEkTNK5Zi61GNJkN
+    - export BUTLER_API_KEY=sPV15ap7WDYnVIPh4rEWrzu9UFcBKNpikF0w7uTW
     - butler push ./build/windows $ITCHIO_USERNAME/$ITCHIO_GAME:windows
   dependencies:
     - windows
