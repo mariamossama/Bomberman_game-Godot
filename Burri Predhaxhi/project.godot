@@ -23,6 +23,7 @@ GameManager="*res://GameManager.cs"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
 
 [dotnet]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkb3og0056f0h"]
+[gd_scene load_steps=3 format=3 uid="uid://d361sxxwvj2fk"]
 
 [ext_resource type="FontFile" uid="uid://c0pbtrtjakd3t" path="res://Fonts/bm.ttf" id="1_6m3bj"]
 [ext_resource type="Script" path="res://scripts/menu/networking.cs" id="1_t62qq"]
@@ -19,6 +19,7 @@ theme_override_font_sizes/font_size = 80
 text = "Host"
 
 [node name="Join" type="Button" parent="."]
+layout_mode = 0
 offset_left = 664.0
 offset_top = 624.0
 offset_right = 954.0
@@ -28,6 +29,7 @@ theme_override_font_sizes/font_size = 80
 text = "Join"
 
 [node name="Start" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1160.0
 offset_top = 624.0
 offset_right = 1459.0
