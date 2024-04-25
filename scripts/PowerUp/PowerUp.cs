@@ -119,6 +119,29 @@ public partial class PowerUp : Area2D
 	{
 		_isInvincible = false;
 	}
+	
+	public override void _Notification(int what)
+	{
+		// Check if the notification is for pre-deletion
+		if (what == NotificationPredelete)
+		{
+			// Free any resources here before the node is deleted
+
+			// For example, if you need to free any allocated resources, do it here
+			// Release any references to other nodes or resources
+			// Set any variables to null to release memory
+			// Ensure you don't access any resources or nodes after this point
+
+			// If you need to free resources of child nodes, you can do so recursively
+			foreach (Node child in GetChildren())
+			{
+				if (child is Node2D)
+				{
+					((Node2D)child).Free();
+				}
+			}
+		}
+	}
 }
 
 

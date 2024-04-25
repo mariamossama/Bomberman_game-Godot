@@ -25,6 +25,15 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Burri Predhaxhi"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
+
+[gdunit4]
+
+settings/test/test_lookup_folder=""
+ui/toolbar/run_overall=true
+
 [input]
 
 move_right={

@@ -50,13 +50,20 @@ private void OnBodyEntered(Node body)
 
 	public void Destroy()
 	{
-		GD.Print("Box destroyed");
-		animatedSprite2D.Play("blown");
-		collisionShape.Disabled = true;
+	
+		//animatedSprite2D.Play("blown");
+		//collisionShape.Disabled = true;
 		isDestroyed = true;
-		collectPowerUps();
-	}
 
+		GD.Print("hi");
+		GD.Print("Box destroyed");
+		collectPowerUps();
+		QueueFree();
+	}
+	public bool getIsDestroyed()
+	{
+		return isDestroyed;
+	}
 	private void collectPowerUps()
 	{
 		if (rng.Next(100) < powerUpChance)
@@ -74,7 +81,6 @@ private void OnBodyEntered(Node body)
 			GD.Print("doesn't have a power up");
 		}
 
-		QueueFree();
 	}
 
 	private void SpawnPowerUp(Vector2 boxPosition)
@@ -84,5 +90,23 @@ private void OnBodyEntered(Node body)
 		GD.Print("you got a pwer up : type ");
 	
 	}
+
+	public override void _Notification(int what)
+	{
+		// Check if the notification is for pre-deletion
+		if (what == NotificationPredelete)
+		{
+	
+			foreach (Node child in GetChildren())
+			{
+				if (child is Node2D)
+				{
+					((Node2D)child).Free();
+				}
+			}
+		}
+	}
+	
+	
 
 }
