@@ -41,25 +41,29 @@ public partial class Player : CharacterBody2D, IDestroyable
 	public override void _Ready()
 	{
 		//this.speed = 100;
+		GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").SetMultiplayerAuthority(int.Parse(Name));
 		this.velocity = new Vector2();
 		this.animationSprite = GetNode<Area2D>("PlayerArea2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		bombScene = GD.Load<PackedScene>("res://Bomb.tscn");
 	}
 	
 	public override void _PhysicsProcess(double _delta) {
-		Vector2 direction = new Vector2(
+		if(GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() == Multiplayer.GetUniqueId()){
+			Vector2 direction = new Vector2(
 			Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left"),
 			Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
 			
-		);
+			);
 		
-		if (direction.Length() > 1) {
-			direction = direction.Normalized();
-		}
+			if (direction.Length() > 1) {
+				direction = direction.Normalized();
+			}
 
-		Velocity = direction * Speed;
-		changeAnimation(direction);
-		MoveAndSlide();
+			Velocity = direction * Speed;
+			changeAnimation(direction);
+			MoveAndSlide();
+		}
+		
 		
 	}
 	

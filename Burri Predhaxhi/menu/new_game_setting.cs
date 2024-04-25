@@ -20,11 +20,15 @@ public partial class new_game_setting : Control
 	}
 	private void map_1_pressed()
 	{
-		var frame = GD.Load<PackedScene>("res://Gaming.tscn").Instantiate();
-		GetTree().Root.AddChild(frame);
-		var newgame = GD.Load<PackedScene>("res://Asset/Map/Map2.tscn").Instantiate();
+		//var frame = GD.Load<PackedScene>("res://Gaming.tscn").Instantiate();
+		//GetTree().Root.AddChild(frame);
+		//var newgame = GD.Load<PackedScene>("res://Asset/Map/Map2.tscn").Instantiate();
+		//GetTree().Root.AddChild(newgame);
+		//Hide();// Replace with function body.
+		var newgame = GD.Load<PackedScene>("res://menu/networking.tscn").Instantiate();
 		GetTree().Root.AddChild(newgame);
-		Hide();// Replace with function body.
+		Hide();
+		
 	}
 	
 	private void map_2_pressed()
