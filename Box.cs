@@ -64,7 +64,15 @@ private void OnBodyEntered(Node body)
 	{
 		return isDestroyed;
 	}
-	private void collectPowerUps()
+	public bool gethasPowerUp()
+	{
+		return hasPowerUp;
+	}
+	public void setpowerUpChance(int value)
+	{
+		powerUpChance = value ;
+	}
+	public void collectPowerUps()
 	{
 		if (rng.Next(100) < powerUpChance)
 		{
