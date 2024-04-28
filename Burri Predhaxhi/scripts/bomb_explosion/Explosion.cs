@@ -15,6 +15,12 @@ public partial class Explosion : Node2D
 		}
 	}
 
+	public void increaseChildrenRange(int value){
+		foreach (ExplosionFlame e in GetChildren()){
+			e.rangeIncrease = value;
+		}
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{

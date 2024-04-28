@@ -44,6 +44,7 @@ public partial class Level : Node2D
 			var bombInstance = (Bomb) bombScene.Instantiate();
 			var playerPos = GetNode<CharacterBody2D>("Player").Position;
 			
+			bombInstance.setFlameIncrease(playerInstance.nrOfRangeIncreasePowerUps);
 			bombInstance.Position = playerPos;
 			bombInstance.HasDetonated += OnBombHasDetonated;
 			AddChild(bombInstance);
@@ -99,10 +100,10 @@ public partial class Level : Node2D
 
 
 	private void InsertPowerUps(){
-		powerUpScene = GD.Load<PackedScene>( "res://Asset/BombIncreasePowerUp.tscn");
-		BombIncreasePowerUp bombIncPowerUp = (BombIncreasePowerUp) powerUpScene.Instantiate();
-		bombIncPowerUp.Position = new Vector2(426, 77); //temp
-		AddChild(bombIncPowerUp);
+		powerUpScene = GD.Load<PackedScene>( "res://Asset/FireRangeIncreasePowerUp.tscn");
+		FireRangeIncreasePowerUp fr = (FireRangeIncreasePowerUp) powerUpScene.Instantiate();
+		fr.Position = new Vector2(426, 77); //temp
+		AddChild(fr);
 	}
 
 	

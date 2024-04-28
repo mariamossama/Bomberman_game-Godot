@@ -8,6 +8,7 @@ public partial class Bomb : RigidBody2D
 	
 	private AnimatedSprite2D animatedSprite2D;
 	CharacterBody2D player;
+	
 	public override void _Ready()
 	{
 		//TODO Change this to generalize to many players
@@ -15,6 +16,11 @@ public partial class Bomb : RigidBody2D
 		AddCollisionExceptionWith(player);
 		animatedSprite2D = GetNode<AnimatedSprite2D>("BombAnimation");
 		animatedSprite2D.Play();
+	}
+
+	public void setFlameIncrease(int numberIncrease) {
+		var explosion = GetNode<Explosion>("Explosion");
+		explosion.increaseChildrenRange(numberIncrease);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

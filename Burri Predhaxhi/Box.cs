@@ -52,29 +52,31 @@ private void OnBodyEntered(Node body)
 	{
 		GD.Print("Box destroyed");
 		animatedSprite2D.Play("blown");
-		collisionShape.Disabled = true;
+		collisionShape.SetDeferred("disabled", true);
 		isDestroyed = true;
 		collectPowerUps();
 	}
 
 	private void collectPowerUps()
 	{
-		if (rng.Next(100) < powerUpChance)
-		{
-			hasPowerUp = true;
-			SpawnPowerUp(Position);
-			GD.Print(Position);
-			var newPowerUp = (Area2D)  _ScenePowerUp.Instantiate();
-			newPowerUp.Position = Position;
-			GetTree().Root.AddChild(newPowerUp);
-			//QueueFree();
-		}
-		else
-		{
-			GD.Print("doesn't have a power up");
-		}
+		//why should boxes collect the powerups? 
+		// if (rng.Next(100) < powerUpChance)
+		// {
+		// 	hasPowerUp = true;
+		// 	SpawnPowerUp(Position);
+		// 	GD.Print(Position);
+		// 	var newPowerUp = (Area2D)  _ScenePowerUp.Instantiate();
+		// 	newPowerUp.Position = Position;
+		// 	// GetTree().Root.AddChild(newPowerUp);
+		// 	GetTree().Root.CallDeferred("add_child", newPowerUp);
+		// 	//QueueFree();
+		// }
+		// else
+		// {
+		// 	GD.Print("doesn't have a power up");
+		// }
 
-		QueueFree();
+		// QueueFree();
 	}
 
 	private void SpawnPowerUp(Vector2 boxPosition)

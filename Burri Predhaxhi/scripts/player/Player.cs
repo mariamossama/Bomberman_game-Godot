@@ -18,6 +18,8 @@ public partial class Player : CharacterBody2D, IDestroyable
 	public int maxBombCount = 1; //initially one, when you get the bomb number increasing powerup, make sure to increment it
 	public bool canPlaceBomb = true;
 
+	public int nrOfRangeIncreasePowerUps = 0;
+
 	public Vector2I initialPlayerPos;
 	
 	public void Destroy() {
