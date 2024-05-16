@@ -28,6 +28,9 @@ public partial class Level : Node2D
 		monsterScene = GD.Load<PackedScene>("res://Monster.tscn");
 		tileMap = GetNode<Node2D>("LevelFloor").GetNode<TileMap>("TileMap");
 		utils = new Utils(tileMap);
+		foreach (RigidBody2D box in GetChildren().Where(x => x is Box)) {
+			GameStateSingleton.FetchGameState().RayCastIgnores.Add(box);
+		}
 		SpawnPlayers();
 		SpawnMonsters();
 		InsertPowerUps();
@@ -55,6 +58,8 @@ public partial class Level : Node2D
 				playerInstance.canPlaceBomb = false;
 				bombCount = 0;
 			}
+
+			GameStateSingleton.FetchGameState().RayCastIgnores.Add(bombInstance);
 		}
 	}
 
@@ -65,6 +70,7 @@ public partial class Level : Node2D
 		playerInstance.PlayerWasRemoved += OnPlayerWasRemoved;
 		playerInstance.Position = ToLocal(utils.convertedCoords(playerInstance.initialPlayerPos)); //????
 		AddChild(playerInstance);
+		GameStateSingleton.FetchGameState().RayCastIgnores.Add(playerInstance);
 	}
 	
 	private void SpawnMonsters(){ //generalize for multiple monsters (create multiple instances)
@@ -82,7 +88,7 @@ public partial class Level : Node2D
 		monsterInstance.Position = ToLocal(utils.convertedCoords(randomAvailCoordinate));
 
 		AddChild(monsterInstance);
-
+		GameStateSingleton.FetchGameState().RayCastIgnores.Add(monsterInstance);
 	}
 	
 	private void OnPlayerWasRemoved() //FIXME: misleading name, add a restart method and queuefree monsters as well

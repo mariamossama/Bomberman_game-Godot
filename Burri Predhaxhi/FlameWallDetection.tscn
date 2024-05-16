@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://6mf7y4nhg6in"]
+
+[ext_resource type="PackedScene" uid="uid://bmt6qv8bolpd7" path="res://ExplosionFlame.tscn" id="1_mvpjw"]
+[ext_resource type="Script" path="res://scripts/bomb_explosion/FlameWallDetection.cs" id="1_qbu6y"]
+
+[node name="FlameWallDetection" type="Node2D"]
+script = ExtResource("1_qbu6y")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+rotation = 3.14159
+target_position = Vector2(3.57559e-05, 409)
+
+[node name="ExplosionFlame" parent="." instance=ExtResource("1_mvpjw")]

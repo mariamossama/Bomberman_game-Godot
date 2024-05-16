@@ -1,23 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmuvevjbndrta"]
 
-[ext_resource type="PackedScene" uid="uid://bmt6qv8bolpd7" path="res://ExplosionFlame.tscn" id="1_ttwhw"]
 [ext_resource type="Script" path="res://scripts/bomb_explosion/Explosion.cs" id="1_vb3a1"]
+[ext_resource type="PackedScene" uid="uid://6mf7y4nhg6in" path="res://FlameWallDetection.tscn" id="2_cfnn5"]
 
 [node name="Explosion" type="Node2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_vb3a1")
 
-[node name="ExplosionFlame" parent="." instance=ExtResource("1_ttwhw")]
-position = Vector2(0, -32)
+[node name="FlameWallDetection" parent="." instance=ExtResource("2_cfnn5")]
 
-[node name="ExplosionFlame2" parent="." instance=ExtResource("1_ttwhw")]
-position = Vector2(32, 0)
+[node name="FlameWallDetection2" parent="." instance=ExtResource("2_cfnn5")]
 rotation = 1.5708
 
-[node name="ExplosionFlame3" parent="." instance=ExtResource("1_ttwhw")]
-position = Vector2(-32, 0)
+[node name="FlameWallDetection3" parent="." instance=ExtResource("2_cfnn5")]
 rotation = -1.5708
 
-[node name="ExplosionFlame4" parent="." instance=ExtResource("1_ttwhw")]
-position = Vector2(0, 32)
-rotation = -3.14159
+[node name="FlameWallDetection4" parent="." instance=ExtResource("2_cfnn5")]
+rotation = 3.14159

@@ -9,15 +9,14 @@ public partial class Explosion : Node2D
 	}
 	
 	public void ToggleFlames(){
-		foreach (ExplosionFlame e in GetChildren()){
-			e.ToggleFlameCollision();
-			e.ToggleEmission();
+		foreach (FlameWallDetection e in GetChildren()){
+			e.ToggleFlame();
 		}
 	}
 
 	public void increaseChildrenRange(int value){
-		foreach (ExplosionFlame e in GetChildren()){
-			e.rangeIncrease = value;
+		foreach (FlameWallDetection e in GetChildren()){
+			e.increaseFireRange(value);
 		}
 	}
 
