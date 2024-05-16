@@ -44,7 +44,9 @@ public partial class Level : Node2D
 	private void PlaceBomb(){
 
 		if (Input.IsActionJustPressed("place_bomb_p1") && playerInstance.canPlaceBomb){
+			GD.Print("Bfore instantioation");
 			var bombInstance = (Bomb) bombScene.Instantiate();
+			GD.Print("Aftor instantioation");
 			var playerPos = GetNode<CharacterBody2D>("Player").Position;
 			
 			bombInstance.setFlameIncrease(playerInstance.nrOfRangeIncreasePowerUps);

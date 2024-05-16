@@ -50,6 +50,7 @@ private void OnBodyEntered(Node body)
 
 	public void Destroy()
 	{
+		GameStateSingleton.FetchGameState().RayCastIgnores.Remove(this);
 		GD.Print("Box destroyed");
 		animatedSprite2D.Play("blown");
 		collisionShape.SetDeferred("disabled", true);

@@ -97,6 +97,7 @@ public partial class Monster : CharacterBody2D, IDestroyable
 	{
 		if (dead)
 		{
+			GameStateSingleton.FetchGameState().RayCastIgnores.Remove(this);
 			QueueFree();
 		}
 	}

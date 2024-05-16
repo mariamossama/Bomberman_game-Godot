@@ -8,6 +8,6 @@ script = ExtResource("1_qbu6y")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 rotation = 3.14159
-target_position = Vector2(3.57559e-05, 409)
+target_position = Vector2(0, 500)
 
 [node name="ExplosionFlame" parent="." instance=ExtResource("1_mvpjw")]

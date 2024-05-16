@@ -46,6 +46,7 @@ public partial class Bomb : RigidBody2D
 	{
 		var explosion = GetNode<Explosion>("Explosion");
 		explosion.ToggleFlames();
+		GameStateSingleton.FetchGameState().RayCastIgnores.Remove(this);
 		QueueFree();
 	}
 

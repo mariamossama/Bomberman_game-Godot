@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class ExplosionFlame : Node2D
 {
@@ -9,12 +10,12 @@ public partial class ExplosionFlame : Node2D
 	[Export]
 	public int rangeIncrease = 0;
 
-	private const int X = 65;
-	private const int Y = 268;
+	public int X = 65;
+	public int Y = 200;
 
-	private const double flameAnimationIncrease = 0.15;
-
-	public Vector2 collisionPoint;
+	private const double flameAnimationIncrease = 1f / 3f;
+	private const double lifetimeBoxlenRatio = 1.0 / 250.0;
+	public float collisionPointDistance;
 
 	public override void _Ready()
 	{
@@ -29,14 +30,19 @@ public partial class ExplosionFlame : Node2D
 		collshape.Shape = rectangleShape;
 
 		if (rangeIncrease > 0){
-			 GetNode<GpuParticles2D>("Flame").Lifetime += flameAnimationIncrease;
+			 GetNode<GpuParticles2D>("Flame").Lifetime = (Y + rangeIncrease*100 + 50) * lifetimeBoxlenRatio ;
+			 //GetNode<GpuParticles2D>("Flame").Lifetime += flameAnimationIncrease * rangeIncrease;
 		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		ResizeFlame(collisionPoint);
+		// if (!Resized){
+			//ResizeFlame(collisionPoint);
+			// Resized = true;
+		// }
+
 
 	}
 	
@@ -75,28 +81,27 @@ public partial class ExplosionFlame : Node2D
 			destroyable.Destroy();
 		}
 	}
-
-	public void ResizeFlame(Vector2 collisionPoint){
-
-		var collshape = GetNode<Area2D>("Area2D").GetNode<CollisionShape2D>("CollisionShape2D");
-		
-		Vector2 newPoint = collisionPoint - collshape.GlobalPosition;
-
-		GD.Print("pika i rafte " + newPoint.Y);
-		
+	
+	private double getFlameLifetime(float collisionPointDistance){
+		return Math.Min(Y + rangeIncrease*100 + 50, collisionPointDistance) * lifetimeBoxlenRatio;
+	}
+	
+	public void ResizeFlame(float collisionPointDistance){
+		var collArea = GetNode<Area2D>("Area2D");
+		var collshape = collArea.GetNode<CollisionShape2D>("CollisionShape2D");
 		RectangleShape2D rectangleShape;
+		var boxYPos = -Math.Min(collisionPointDistance / 2, (Y + rangeIncrease*100f) / 2);
+		var collShapeYSize = Math.Min(collisionPointDistance, Y + rangeIncrease*100f + 50);
 
-		if (collshape.Shape.GetRect().HasPoint(newPoint)){
-
-			rectangleShape = new RectangleShape2D
+		var shapeSize = new Vector2(X, collShapeYSize);
+		collArea.Position =  new Vector2(0, boxYPos);
+		GetNode<GpuParticles2D>("Flame").Lifetime = getFlameLifetime(collisionPointDistance);
+		var box = shapeSize; 
+		rectangleShape = new RectangleShape2D
 			{
-				Size = new Vector2(X, newPoint.Y)
+				Size = box
 			};
-
-			collshape.Shape = rectangleShape;
-		}
-
-		
+		collshape.Shape = rectangleShape;
 	}
 
 }

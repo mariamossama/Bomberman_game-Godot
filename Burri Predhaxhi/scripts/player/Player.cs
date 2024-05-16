@@ -74,6 +74,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 	private void OnAnimationFinished(){
 		if (dead){
+			GameStateSingleton.FetchGameState().RayCastIgnores.Remove(this);
 			QueueFree();
 		}
 	}
