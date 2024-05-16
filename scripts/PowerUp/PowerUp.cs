@@ -14,6 +14,7 @@ public partial class PowerUp : Area2D
 		
 		 };
 	private bool _isInvincible = true;
+	private bool expired = false ;
 	private Sprite2D _sprite;
 	private bool _isFlickerOn = true;
 	private bool _isShouldFlicker = false;
@@ -49,6 +50,7 @@ public partial class PowerUp : Area2D
 			foreach(Area2D area in overlappingAreas){
 				if (area.Name.ToString().StartsWith("Player")){
 					PlayerPickup();
+					expired = true;
 				}
 				else {
 					Ignite();
