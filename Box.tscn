@@ -28,7 +28,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_0kawp")
 }],
-"loop": true,
+"loop": false,
 "name": &"staticBox",
 "speed": 5.0
 }]
