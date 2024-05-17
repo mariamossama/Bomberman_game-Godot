@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://4hcetcm4fv1n"]
+[gd_scene load_steps=4 format=3 uid="uid://4hcetcm4fv1n"]
 
 [ext_resource type="PackedScene" uid="uid://tavkt8aodbff" path="res://LevelFloor.tscn" id="1_4nk0g"]
 [ext_resource type="Script" path="res://scripts/Level.cs" id="1_qlxil"]
-[ext_resource type="PackedScene" uid="uid://cdaatksdkm0fp" path="res://Asset/PowerUp.tscn" id="3_4oqco"]
 [ext_resource type="PackedScene" uid="uid://de1g0xx7qsbtt" path="res://Box.tscn" id="4_sbsjm"]
 
 [node name="TestLevel" type="Node2D"]
@@ -27,9 +26,6 @@ scale = Vector2(6.32, 16.16)
 color = Color(0.188235, 0.219608, 0.254902, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="PowerUp" parent="." instance=ExtResource("3_4oqco")]
-position = Vector2(360, 64)
-
 [node name="Box" parent="." instance=ExtResource("4_sbsjm")]
 position = Vector2(408, 264)
 
@@ -37,4 +33,4 @@ position = Vector2(408, 264)
 position = Vector2(512, 152)
 
 [node name="Box3" parent="." instance=ExtResource("4_sbsjm")]
-position = Vector2(411, 157)
+position = Vector2(607, 260)

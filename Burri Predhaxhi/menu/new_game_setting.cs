@@ -16,7 +16,8 @@ public partial class new_game_setting : Control
 	{
 		var newgame = GD.Load<PackedScene>("res://Gaming.tscn").Instantiate();
 		GetTree().Root.AddChild(newgame);
-		var game = GD.Load<PackedScene>("res://menu/networking.tscn").Instantiate();
+		var game = GD.Load<PackedScene>("res://TestLevel.tscn").Instantiate();
+		//var game = GD.Load<PackedScene>("res://menu/networking.tscn").Instantiate();
 		GetTree().Root.AddChild(game);
 		
 		Hide();

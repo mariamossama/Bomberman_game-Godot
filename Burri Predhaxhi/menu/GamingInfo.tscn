@@ -107,6 +107,7 @@ offset_bottom = -72.0
 text = "Yes, exit"
 
 [node name="Main Menu" type="Button" parent="ExitWindow"]
+layout_mode = 0
 offset_left = 350.0
 offset_top = 200.0
 offset_right = 541.0
@@ -114,6 +115,7 @@ offset_bottom = 260.0
 text = "Just back to main menu"
 
 [node name="Label" type="Label" parent="ExitWindow"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 100.0
 offset_right = 335.0
@@ -122,6 +124,7 @@ theme_override_font_sizes/font_size = 25
 text = "Do you want to exit the game?"
 
 [node name="No" type="Button" parent="ExitWindow"]
+layout_mode = 0
 offset_left = 215.0
 offset_top = 200.0
 offset_right = 322.0

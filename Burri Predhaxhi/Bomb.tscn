@@ -66,6 +66,9 @@ animation = &"bomb1"
 frame = 1
 frame_progress = 0.329356
 
+[node name="BombPlacementTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="BombTimer" to="." method="OnBombTimerTimeout"]
 [connection signal="timeout" from="ExplosionEndedTimer" to="." method="OnExplosionEndedTimerTimeout"]
 [connection signal="timeout" from="ExplosionStartTimer" to="." method="OnExplosionStartTimerTimeout"]

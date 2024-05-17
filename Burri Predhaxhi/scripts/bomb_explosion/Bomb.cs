@@ -3,11 +3,12 @@ using System;
 
 public partial class Bomb : RigidBody2D
 {
-	[Signal] public delegate void DetonatedEventHandler(Vector2 position);
+	[Signal] 
+	public delegate void HasDetonatedEventHandler(); 
 	
-	// Called when the node enters the scene tree for the first time.
 	private AnimatedSprite2D animatedSprite2D;
 	CharacterBody2D player;
+	
 	public override void _Ready()
 	{
 		//TODO Change this to generalize to many players
@@ -15,6 +16,28 @@ public partial class Bomb : RigidBody2D
 		AddCollisionExceptionWith(player);
 		animatedSprite2D = GetNode<AnimatedSprite2D>("BombAnimation");
 		animatedSprite2D.Play();
+		if (player == null)
+		{
+			GD.PrintErr("Player node not found relative to ", GetParent().Name);
+			// 尝试使用其他路径查找 Player 节点
+			player = GetTree().Root.GetNodeOrNull<CharacterBody2D>("root/Player");
+			if (player == null)
+			{
+				GD.PrintErr("Player node not found in root");
+				// 可以添加更多路径或方式查找 Player 节点
+			}
+		}
+
+		if (player != null)
+		{
+			AddCollisionExceptionWith(player);
+			GD.Print("Player node found: ", player.Name);
+		}
+	}
+
+	public void setFlameIncrease(int numberIncrease) {
+		var explosion = GetNode<Explosion>("Explosion");
+		explosion.increaseChildrenRange(numberIncrease);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,6 +55,7 @@ public partial class Bomb : RigidBody2D
 	private void OnExplosionStartTimerTimeout()
 	{
 		var explosion = GetNode<Explosion>("Explosion");
+		EmitSignal(SignalName.HasDetonated);
 		explosion.ToggleFlames();
 	}
 	
@@ -39,7 +63,7 @@ public partial class Bomb : RigidBody2D
 	{
 		var explosion = GetNode<Explosion>("Explosion");
 		explosion.ToggleFlames();
-		EmitSignal(nameof(Detonated), Position);
+		GameStateSingleton.FetchGameState().RayCastIgnores.Remove(this);
 		QueueFree();
 	}
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmufhstakmyq6"]
+[gd_scene load_steps=5 format=3 uid="uid://dmufhstakmyq6"]
 
-[ext_resource type="Texture2D" uid="uid://btsnxe3i1aoug" path="res://tileset_sf2.png" id="1_vjbi2"]
+[ext_resource type="Texture2D" path="res://tileset_sf2.png" id="1_vjbi2"]
+[ext_resource type="PackedScene" uid="uid://c3oogdy0eygrc" path="res://Monster.tscn" id="2_0n4fp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q1wuq"]
 texture = ExtResource("1_vjbi2")
@@ -5257,3 +5258,12 @@ position = Vector2(1048, 240)
 
 [node name="0" type="Node2D" parent="PlayerSpawnPoints" groups=["PlayerSpawnPoints"]]
 position = Vector2(480, 232)
+
+[node name="Monster" parent="." instance=ExtResource("2_0n4fp")]
+position = Vector2(408, 608)
+
+[node name="Monster2" parent="." instance=ExtResource("2_0n4fp")]
+position = Vector2(672, 472)
+
+[node name="Monster3" parent="." instance=ExtResource("2_0n4fp")]
+position = Vector2(792, 736)

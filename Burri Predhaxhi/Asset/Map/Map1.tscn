@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://djakaf0peieyk"]
+[gd_scene load_steps=9 format=3 uid="uid://djakaf0peieyk"]
 
-[ext_resource type="Texture2D" uid="uid://btsnxe3i1aoug" path="res://tileset_sf2.png" id="1_3kkd7"]
+[ext_resource type="Texture2D" path="res://tileset_sf2.png" id="1_3kkd7"]
 [ext_resource type="Script" path="res://scripts/Maps/Map1.cs" id="1_o86qy"]
 [ext_resource type="PackedScene" uid="uid://de1g0xx7qsbtt" path="res://Box.tscn" id="2_dpvk0"]
+[ext_resource type="PackedScene" uid="uid://cqcqeyiw38xmr" path="res://Bomb.tscn" id="3_i43ma"]
 [ext_resource type="PackedScene" uid="uid://bgfavc6m175gi" path="res://Player.tscn" id="3_s0y66"]
+[ext_resource type="PackedScene" uid="uid://c3oogdy0eygrc" path="res://Monster.tscn" id="5_g28uy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2pqrj"]
 texture = ExtResource("1_3kkd7")
@@ -520,6 +522,7 @@ sources/2 = SubResource("TileSetAtlasSource_2pqrj")
 [node name="Map1" type="Node2D"]
 script = ExtResource("1_o86qy")
 playerScene = ExtResource("3_s0y66")
+bombScene = ExtResource("3_i43ma")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_d5j63")
@@ -567,3 +570,12 @@ position = Vector2(1372, 750)
 
 [node name="0" type="Node2D" parent="PlayerSpawnPoints" groups=["PlayerSpawnPoints"]]
 position = Vector2(276, 230)
+
+[node name="Monster" parent="." instance=ExtResource("5_g28uy")]
+position = Vector2(410, 486)
+
+[node name="Monster2" parent="." instance=ExtResource("5_g28uy")]
+position = Vector2(907, 484)
+
+[node name="Monster3" parent="." instance=ExtResource("5_g28uy")]
+position = Vector2(923, 353)
