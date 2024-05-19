@@ -32,7 +32,7 @@ public partial class networking : Control
 	
 	private void ConnectedToServer()
 	{
-		GD.Print("Connected To Server");
+		GD.Print("Connected To " + address);
 		RpcId(1, "sendPlayerInformation", GetNode<LineEdit>("LineEdit").Text, Multiplayer.GetUniqueId());
 	}
 

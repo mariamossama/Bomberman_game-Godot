@@ -40,7 +40,7 @@ public partial class Map1 : Node2D
 
 		foreach (var player in players)
 		{
-			string actionName = "place_bomb_p" + player.Name;
+			string actionName = "place_bomb_p1";// + player.Name;
 			GD.Print("Checking action: ", actionName);
 
 			if (InputMap.HasAction(actionName) && Input.IsActionJustPressed(actionName) && player.canPlaceBomb)
@@ -52,7 +52,7 @@ public partial class Map1 : Node2D
 				bombInstance.setFlameIncrease(player.nrOfRangeIncreasePowerUps);
 				bombInstance.HasDetonated += player.OnBombHasDetonated;
 				AddChild(bombInstance);
-
+//
 				player.canPlaceBomb = false;
 				GD.Print("Bomb placed at: ", player.Position);
 			}

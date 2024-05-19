@@ -51,9 +51,14 @@ public partial class GamingInfo : Node
 	{
 		_exitMenu.Hide();
 	}	
-
+	
+	private void _on_custom_setting()
+	{
+		var game = GD.Load<PackedScene>("res://menu/custsetting.tscn").Instantiate();
+		GetTree().Root.AddChild(game);
+		// Replace with function body.
+	}
 }
-
 
 
 

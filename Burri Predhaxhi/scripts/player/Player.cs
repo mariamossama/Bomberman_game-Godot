@@ -55,7 +55,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 	public void OnBombHasDetonated()
 	{
 		canPlaceBomb = true;
-		GD.Print("Bomb detonated");
+		//GD.Print("Bomb detonated");
 	}
 	public override void _PhysicsProcess(double _delta) {
 		//if(GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() == Multiplayer.GetUniqueId()){
@@ -70,7 +70,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 					Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
 				);
 
-				GD.Print("Direction raw: ", direction); 
+				//GD.Print("Direction raw: ", direction); 
 
 				if (direction.Length() > 1)
 				{

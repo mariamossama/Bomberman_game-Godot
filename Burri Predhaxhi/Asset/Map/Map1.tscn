@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://djakaf0peieyk"]
 
-[ext_resource type="Texture2D" path="res://tileset_sf2.png" id="1_3kkd7"]
+[ext_resource type="Texture2D" uid="uid://btsnxe3i1aoug" path="res://tileset_sf2.png" id="1_3kkd7"]
 [ext_resource type="Script" path="res://scripts/Maps/Map1.cs" id="1_o86qy"]
 [ext_resource type="PackedScene" uid="uid://de1g0xx7qsbtt" path="res://Box.tscn" id="2_dpvk0"]
 [ext_resource type="PackedScene" uid="uid://cqcqeyiw38xmr" path="res://Bomb.tscn" id="3_i43ma"]
@@ -579,3 +579,24 @@ position = Vector2(907, 484)
 
 [node name="Monster3" parent="." instance=ExtResource("5_g28uy")]
 position = Vector2(923, 353)
+
+[node name="Box11" parent="." instance=ExtResource("2_dpvk0")]
+position = Vector2(517, 464)
+
+[node name="Box12" parent="." instance=ExtResource("2_dpvk0")]
+position = Vector2(515, 275)
+
+[node name="Box13" parent="." instance=ExtResource("2_dpvk0")]
+position = Vector2(1028, 462)
+
+[node name="Box14" parent="." instance=ExtResource("2_dpvk0")]
+position = Vector2(645, 467)
+
+[node name="Box15" parent="." instance=ExtResource("2_dpvk0")]
+position = Vector2(643, 533)
+
+[node name="Box16" parent="." instance=ExtResource("2_dpvk0")]
+position = Vector2(1283, 343)
+
+[node name="Box17" parent="." instance=ExtResource("2_dpvk0")]
+position = Vector2(768, 468)

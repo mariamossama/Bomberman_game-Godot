@@ -16,23 +16,7 @@ public partial class Bomb : RigidBody2D
 		AddCollisionExceptionWith(player);
 		animatedSprite2D = GetNode<AnimatedSprite2D>("BombAnimation");
 		animatedSprite2D.Play();
-		if (player == null)
-		{
-			GD.PrintErr("Player node not found relative to ", GetParent().Name);
-			// 尝试使用其他路径查找 Player 节点
-			player = GetTree().Root.GetNodeOrNull<CharacterBody2D>("root/Player");
-			if (player == null)
-			{
-				GD.PrintErr("Player node not found in root");
-				// 可以添加更多路径或方式查找 Player 节点
-			}
-		}
-
-		if (player != null)
-		{
-			AddCollisionExceptionWith(player);
-			GD.Print("Player node found: ", player.Name);
-		}
+		
 	}
 
 	public void setFlameIncrease(int numberIncrease) {
