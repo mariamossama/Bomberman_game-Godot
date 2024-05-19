@@ -53,3 +53,11 @@ func test_player_destruction2():
 
 ## Test case: Player Collision with Monster
 
+func test_player_collision_with_monster():
+	var runner := scene_runner("res://Player.tscn")
+	var runner2 := scene_runner("res://Monster.tscn")
+	runner.set_property("position",Vector2.ZERO) 
+	runner2.set_property("position", Vector2.ZERO)
+	runner.invoke("_PhysicsProcess",1.0)
+	assert_bool(runner.get_property("dead")== "true")
+	
