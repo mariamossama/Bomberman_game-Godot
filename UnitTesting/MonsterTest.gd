@@ -57,25 +57,3 @@ func test_monster_destruction2():
 	assert_bool(monster.is_queued_for_deletion()==true)
 	
 ## Test case: Monster Animation Change
-#
-#func test_monster_animation_change():
-	#var monster = monster_scene.instance()
-	#add_child(monster)
-	#
-	#monster.call("ChangeAnimation", Vector2.RIGHT)
-	#assert_equal(monster.animationSprite.animation, "walk_side", "Animation should be 'walk_side'")
-	#assert_true(monster.animationSprite.flip_h, "Sprite should be flipped horizontally")
-	#
-	#monster.call("ChangeAnimation", Vector2.LEFT)
-	#assert_equal(monster.animationSprite.animation, "walk_side", "Animation should be 'walk_side'")
-	#assert_false(monster.animationSprite.flip_h, "Sprite should not be flipped horizontally")
-	#
-	#monster.call("ChangeAnimation", Vector2.UP)
-	#assert_equal(monster.animationSprite.animation, "walk_up", "Animation should be 'walk_up'")
-	#
-	#monster.call("ChangeAnimation", Vector2.DOWN)
-	#assert_equal(monster.animationSprite.animation, "walk_down", "Animation should be 'walk_down'")
-	#
-	#monster.dead = true
-	#monster.call("ChangeAnimation", Vector2.ZERO)
-	#assert_equal(monster.animationSprite.animation, "die", "Animation should be 'die'")
