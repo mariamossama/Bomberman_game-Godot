@@ -97,4 +97,7 @@ offset_top = 640.0
 offset_right = 976.0
 offset_bottom = 704.0
 
+[connection signal="pressed" from="Map1" to="." method="map_1_pressed"]
+[connection signal="pressed" from="Map2" to="." method="map_3_pressed"]
+[connection signal="pressed" from="Map3" to="." method="map_3_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
