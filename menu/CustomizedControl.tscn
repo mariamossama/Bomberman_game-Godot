@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://buqs5m8bc7yyv"]
+
+[ext_resource type="Script" path="res://menu/CustomizedControl.cs" id="1_u7d1v"]
+
+[node name="CustomizedControl" type="Control"]
+layout_mode = 3
+anchor_right = 0.037
+anchor_bottom = 0.017
+offset_right = -59.2
+offset_bottom = -15.3
+script = ExtResource("1_u7d1v")
+
+[node name="wasd" type="Button" parent="."]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 147.0
+offset_right = 288.0
+offset_bottom = 169.0
+text = "wasd"
+
+[node name="arrows" type="Button" parent="."]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 146.0
+offset_right = 169.0
+offset_bottom = 171.0
+text = "arrows"
+
+[connection signal="pressed" from="wasd" to="." method="_on_wasd_pressed"]
+[connection signal="pressed" from="arrows" to="." method="_on_arrows_pressed"]

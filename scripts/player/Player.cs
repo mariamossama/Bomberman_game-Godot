@@ -14,7 +14,8 @@ public partial class Player : CharacterBody2D, IDestroyable
 	 public delegate void PlayerWasRemovedEventHandler();
 
 	 Vector2 direction;
-
+	private const string SaveFilePath = "res://menu/key_settings.cfg";
+	public String controls;
 	public int maxBombCount = 1; //initially one, when you get the bomb number increasing powerup, make sure to increment it
 	public bool canPlaceBomb = true;
 	public PackedScene bombScene;
@@ -57,6 +58,24 @@ public partial class Player : CharacterBody2D, IDestroyable
 		canPlaceBomb = true;
 		//GD.Print("Bomb detonated");
 	}
+
+	public String GetControls()
+	{
+		var configFile = new ConfigFile();
+		var err = configFile.Load(SaveFilePath);
+
+		if (err == Error.Ok)
+		{
+			controls = configFile.GetValue("Controls", "LastButtonPressed", "None").ToString();
+			GD.Print($"Last button pressed: {controls}");
+			return controls;
+		}
+		else
+		{
+			GD.Print($"Failed to load config: {err}");
+		}
+		return "";
+	}
 	public override void _PhysicsProcess(double _delta) {
 		//if(GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() == Multiplayer.GetUniqueId()){
 		
@@ -65,11 +84,20 @@ public partial class Player : CharacterBody2D, IDestroyable
 			GD.Print("Has authority"); 
 			if (!dead)
 			{
+				if(GetControls() == "ArrowKeys")
+				{
 				direction = new Vector2(
-					Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left"),
-					Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
+					Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
+					Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up")
 				);
-
+				}
+				else
+				{
+					direction = new Vector2(
+					Input.GetActionStrength("right_optionwasd") - Input.GetActionStrength("left_optionwasd"),
+					Input.GetActionStrength("down_optionwasd") - Input.GetActionStrength("up_optionwasd")
+				);
+				}
 				//GD.Print("Direction raw: ", direction); 
 
 				if (direction.Length() > 1)
