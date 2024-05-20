@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdaatksdkm0fp"]
+[gd_scene load_steps=4 format=3 uid="uid://borp7ump72stf"]
 
 [ext_resource type="Script" path="res://scripts/power_ups/BombIncreasePowerUp.cs" id="1_v5itq"]
 [ext_resource type="Texture2D" uid="uid://bhduqao2wf7be" path="res://bombman/item_multibomb.png" id="2_accbd"]

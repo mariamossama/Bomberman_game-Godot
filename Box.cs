@@ -5,8 +5,10 @@ public partial class Box : RigidBody2D, IDestroyable
 {
 
 	//PowerUp inside ;
-	private const string _PowerUpResource = "res://Asset/BombIncreasePowerUp.tscn";
+	private const string _PowerUpResourcetype1 = "res://Asset/BombIncreasePowerUp.tscn";
+	private const string _PowerUpResourcetype2 = "res://Asset/FireRangeIncreasePowerUp.tscn";
 	private PackedScene _ScenePowerUp;
+	private PackedScene _ScenePowerUp2;
 	
 	private AnimatedSprite2D animatedSprite2D;
 	 private CollisionShape2D collisionShape;
@@ -21,7 +23,8 @@ public partial class Box : RigidBody2D, IDestroyable
 	{
 		animatedSprite2D = GetNode<AnimatedSprite2D>("BoxAnimation");
 		collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
-		_ScenePowerUp = ResourceLoader.Load<PackedScene>(_PowerUpResource);
+		_ScenePowerUp = ResourceLoader.Load<PackedScene>(_PowerUpResourcetype1);
+		_ScenePowerUp2 = ResourceLoader.Load<PackedScene>(_PowerUpResourcetype2);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,7 +32,7 @@ public partial class Box : RigidBody2D, IDestroyable
 	{
 	}
 
-private void OnBodyEntered(Node body)
+public void OnBodyEntered(Node body)
 {
 	if (!isDestroyed)
 	{
@@ -72,32 +75,43 @@ private void OnBodyEntered(Node body)
 	}
 	public void collectPowerUps()
 	{
-		//why should boxes collect the powerups? 
-		// if (rng.Next(100) < powerUpChance)
-		// {
-		// 	hasPowerUp = true;
-		// 	SpawnPowerUp(Position);
-		// 	GD.Print(Position);
-		// 	var newPowerUp = (Area2D)  _ScenePowerUp.Instantiate();
-		// 	newPowerUp.Position = Position;
-		// 	// GetTree().Root.AddChild(newPowerUp);
-		// 	GetTree().Root.CallDeferred("add_child", newPowerUp);
-		// 	//QueueFree();
-		// }
-		// else
-		// {
-		// 	GD.Print("doesn't have a power up");
-		// }
+		if (rng.Next(100) < powerUpChance)
+				{
+					hasPowerUp = true;
+					SpawnPowerUp(Position);
+				}
+				else
+				{
+					GD.Print("No power-up spawned.");
+				}
 
 	}
 
 	private void SpawnPowerUp(Vector2 boxPosition)
-	{
+	 {
 		// Randomly select the type of power-up
-		//should get a method from the power up reference the box owns that gets the bonus and then assign the player reference the bonus 
-		GD.Print("you got a pwer up : type ");
-	
+		PackedScene selectedPowerUpScene;
+		if (rng.Next(2) == 0)
+		{
+			selectedPowerUpScene = _ScenePowerUp;
+			GD.Print("Spawned Bomb Increase Power-Up.");
+		}
+		else
+		{
+			selectedPowerUpScene = _ScenePowerUp2;
+			FireRangeIncreasePowerUp fr = (FireRangeIncreasePowerUp) selectedPowerUpScene.Instantiate();
+			fr.Position = boxPosition; //temp
+			AddChild(fr);
+			GD.Print("Spawned Fire Range Increase Power-Up.");
+		}
+
+		
+		
+		//var bombInstance = (Bomb) bombScene.Instantiate();
+		//newPowerUp.Position = boxPosition;
+		//GetTree().Root.CallDeferred("add_child", newPowerUp);
 	}
+	
 
 	public override void _Notification(int what)
 	{

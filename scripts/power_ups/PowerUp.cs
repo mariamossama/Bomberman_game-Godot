@@ -16,6 +16,9 @@ public abstract partial class PowerUp : Area2D, IDestroyable{
 			QueueFree();
 		}
 	}
+	
+		
+
 
 }
 
