@@ -18,7 +18,7 @@ func child_nodes():
 ## Test case: Box Destruction by Flame
 func test_box_destruction_by_flame():
 	var runner := scene_runner("res://Box.tscn")
-	var runner2 := scene_runner("res://BombExplosion.tscn")
+	var runner2 := scene_runner("res://ExplosionFlame.tscn")
 	runner.invoke("OnBodyEntered", runner2)
 	assert_bool(runner.get_property("isDestroyed")=="true")
 	
