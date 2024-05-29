@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5jygxpruynhg"]
+
+[ext_resource type="Script" path="res://scripts/power_ups/InvincibilityPowerUp.cs" id="1_6cv4x"]
+[ext_resource type="Texture2D" uid="uid://b1dseysvkxe81" path="res://bombman/item_flame.png" id="2_58u6l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4n3m"]
+size = Vector2(33.3333, 31.1111)
+
+[node name="InvincibilityPowerUp" type="Area2D"]
+script = ExtResource("1_6cv4x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_58u6l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.17233e-07)
+scale = Vector2(0.9, 0.9)
+shape = SubResource("RectangleShape2D_l4n3m")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="frame_changed" from="Sprite2D" to="." method="_on_sprite_2d_frame_changed"]
+[connection signal="ready" from="Sprite2D" to="." method="_on_sprite_2d_ready"]

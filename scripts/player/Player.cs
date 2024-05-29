@@ -9,6 +9,12 @@ public partial class Player : CharacterBody2D, IDestroyable
 
 	private Vector2 velocity;
 	private AnimatedSprite2D animationSprite;
+	private bool isInvincible = false;
+	private Timer invincibilityTimer;
+	private Timer blinkTimer;
+	private float invincibilityDuration;
+
+
 
 	 [Signal]
 	 public delegate void PlayerWasRemovedEventHandler();
@@ -29,13 +35,16 @@ public partial class Player : CharacterBody2D, IDestroyable
 		dead = true;
 	}
 	
+	
+	
 	public override void _Ready()
 	{
 		//this.speed = 100;
 		GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").SetMultiplayerAuthority(int.Parse(Name));
 		this.velocity = new Vector2();
 		this.direction = Vector2.Zero;
-		this.animationSprite = GetNode<Area2D>("PlayerArea2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		invincibilityTimer = new Timer();
+		animationSprite = GetNode<Area2D>("PlayerArea2D").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		//bombScene = GD.Load<PackedScene>("res://Bomb.tscn");
 	}
 	//private void PlaceBomb()
@@ -53,6 +62,25 @@ public partial class Player : CharacterBody2D, IDestroyable
 			//GD.Print("Bomb placed at: ", Position);
 		//}
 	//}
+	
+	public void GetInvincible(float duration)
+	{
+		GD.Print("Im invincible");
+		if (!isInvincible)
+		{
+			isInvincible = true;
+			invincibilityDuration = duration;
+
+			Color originalColor = animationSprite.Modulate;
+			
+			
+			invincibilityTimer.Start(duration - 1); // Start invincibility period minus blinking time
+			blinkTimer.Start(0.2f); // Start blinking timer with interval of 0.2 seconds
+		}    
+		}
+
+	
+
 	public void OnBombHasDetonated()
 	{
 		canPlaceBomb = true;
@@ -78,7 +106,7 @@ public partial class Player : CharacterBody2D, IDestroyable
 	}
 	public override void _PhysicsProcess(double _delta) {
 		//if(GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() == Multiplayer.GetUniqueId()){
-		
+		//animationSprite.Visible = false;
 		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() == Multiplayer.GetUniqueId())
 		{
 			GD.Print("Has authority"); 
@@ -200,6 +228,8 @@ public partial class Player : CharacterBody2D, IDestroyable
 	// 	return true;
 	// }
 	private void DieAfterCollidingWMonster(){
+		if (isInvincible)
+			return;
 		for (int i = 0; i < GetSlideCollisionCount(); i++)
 		{
 			KinematicCollision2D collision = GetSlideCollision(i);
@@ -207,6 +237,19 @@ public partial class Player : CharacterBody2D, IDestroyable
 				dead = true;
 		}
 	}
+	public void ChangeSpeed(int newSpeed)
+	{
+		Speed = newSpeed;
+		GD.Print("Speed changed to ???????: ", Speed);
+	}
+	 private void time_out()
+	{
+		GD.Print("timeout");
+		isInvincible = false ;
+	}
 	
-
+	
 }
+
+
+

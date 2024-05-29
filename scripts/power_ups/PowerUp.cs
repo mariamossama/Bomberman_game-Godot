@@ -11,7 +11,9 @@ public abstract partial class PowerUp : Area2D, IDestroyable{
 	
 	private void OnBodyEntered(Node2D body)
 	{
+		GD.Print("body entered");
 		if (body is Player){
+			GD.Print("it's player entered");
 			ApplyPowerUp((Player) body);
 			QueueFree();
 		}
